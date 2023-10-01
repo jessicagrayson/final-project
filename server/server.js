@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars  -- Remove when used */
 import 'dotenv/config';
 import express from 'express';
+import argon2 from 'argon2';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
@@ -15,6 +16,13 @@ const db = new pg.Pool({
   },
 });
 
+// Validation functions
+function validateRegistration(username, password) {
+  if (!username || !password) {
+    throw new ClientError(400, 'Username and password are required fields');
+  }
+}
+
 const app = express();
 
 // Create paths for static directories
@@ -28,6 +36,36 @@ app.use(express.json());
 
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello, World!' });
+});
+
+app.post('/api/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    // Validates registration data - throws error if invalid
+    if (!validateRegistration(username, password)) {
+      return res
+        .status(400)
+        .json({ message: 'Username and password required' });
+    }
+    // Hashes user's password using argon
+    // const hashedPassword = await argon2.hash(password);
+    // console.log('hashing test:', hashedPassword);
+    // Inserts user into database
+    const insertUserSql = `
+    INSERT INTO "users"("username", "hashedPassword")
+    VALUES($1, $2)
+    RETURNING "userId", "username", "createdAt"
+    `;
+    const { rows } = await db.query(insertUserSql, [username, password]);
+
+    // Responds w/ new user data
+    const createdUser = rows[0];
+    res.status(201).json(createdUser);
+    // Handles error
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Failed to register' });
+  }
 });
 
 /**
