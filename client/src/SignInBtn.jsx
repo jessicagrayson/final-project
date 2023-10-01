@@ -5,7 +5,7 @@ export default function SignInBtn() {
     <>
       <button
         type="submit"
-        className="bg-indigo-500 text-white w-80 h-8 rounded-sm mt-5 ml-10">
+        className="h-8 mt-5 ml-10 text-white bg-indigo-500 rounded-sm w-80">
         Sign In
       </button>
     </>

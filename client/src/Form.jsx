@@ -17,7 +17,7 @@ export default function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Note to self Account creation logic that happens when submitted goes here
+    // Logs updated state values for username and password
     console.log('username:', username);
     console.log('password:', password);
   };
