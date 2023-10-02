@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import Form from './Form.jsx';
+import Form from './Form.jsx';
 import GophrLogo from './GophrLogo.jsx';
 import './App.css';
 
@@ -23,7 +23,7 @@ export default function App() {
     <>
       <div>
         <GophrLogo />
-        {/* <Form /> */}
+        <Form />
       </div>
       <h1>{serverData}</h1>
     </>
