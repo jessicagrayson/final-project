@@ -31,6 +31,7 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello, World!' });
 });
 
+// Account registration function
 app.post('/api/register', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -41,7 +42,7 @@ app.post('/api/register', async (req, res) => {
     // Hashes user's password using argon
     const hashedPassword = await argon2.hash(password);
     console.log('hashing test:', hashedPassword);
-    // Inserts user into database
+    // Creates sql for new user and inserts into database
     const insertUserSql = `INSERT INTO "users"("username", "hashedPassword")
     VALUES($1, $2)
     RETURNING "userId", "username"
