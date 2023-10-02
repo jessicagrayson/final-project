@@ -16,13 +16,6 @@ const db = new pg.Pool({
   },
 });
 
-// Validation functions
-function validateRegistration(username, password) {
-  if (!username || !password) {
-    throw new ClientError(400, 'Username and password are required fields');
-  }
-}
-
 const app = express();
 
 // Create paths for static directories
@@ -42,25 +35,20 @@ app.post('/api/register', async (req, res) => {
   try {
     const { username, password } = req.body;
     // Validates registration data - throws error if invalid
-    if (!validateRegistration(username, password)) {
-      return res
-        .status(400)
-        .json({ message: 'Username and password required' });
+    if (!username || !password) {
+      throw new ClientError(400, 'username and password required');
     }
     // Hashes user's password using argon
-    // const hashedPassword = await argon2.hash(password);
-    // console.log('hashing test:', hashedPassword);
+    const hashedPassword = await argon2.hash(password);
+    console.log('hashing test:', hashedPassword);
     // Inserts user into database
-    const insertUserSql = `
-    INSERT INTO "users"("username", "hashedPassword")
+    const insertUserSql = `INSERT INTO "users"("username", "hashedPassword")
     VALUES($1, $2)
-    RETURNING "userId", "username", "createdAt"
+    RETURNING "userId", "username"
     `;
-    const { rows } = await db.query(insertUserSql, [username, password]);
-
+    const response = await db.query(insertUserSql, [username, hashedPassword]);
     // Responds w/ new user data
-    const createdUser = rows[0];
-    res.status(201).json(createdUser);
+    res.status(201).json(response.rows[0]);
     // Handles error
   } catch (error) {
     console.error(error);
@@ -86,3 +74,10 @@ app.use(errorMiddleware);
 app.listen(process.env.PORT, () => {
   process.stdout.write(`\n\napp listening on port ${process.env.PORT}\n\n`);
 });
+
+// Validation functions
+function validateRegistration(username, password) {
+  if (!username || !password) {
+    throw new ClientError(400, 'Username and password are required fields');
+  }
+}
