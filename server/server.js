@@ -41,7 +41,6 @@ app.post('/api/register', async (req, res) => {
     }
     // Hashes user's password using argon
     const hashedPassword = await argon2.hash(password);
-    console.log('hashing test:', hashedPassword);
     // Creates sql for new user and inserts into database
     const insertUserSql = `INSERT INTO "users"("username", "hashedPassword")
     VALUES($1, $2)
