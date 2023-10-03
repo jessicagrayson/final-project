@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import Form from './Form.jsx';
-import Entry from './Entry.jsx';
+// import Form from './Form.jsx';
+import EntryForm from './EntryForm.jsx';
 import GophrLogo from './GophrLogo.jsx';
 import './App.css';
 
@@ -24,8 +24,9 @@ export default function App() {
     <>
       <div>
         <GophrLogo />
-        <Form />
-        <Entry />
+        {/* <Form /> */}
+        <EntryForm />
+        {/* <ImageField /> */}
       </div>
       <h1>{serverData}</h1>
     </>

@@ -1,11 +1,11 @@
 // Probably change the name of this at some point
 // Also need to remove mt and ml, just for dev purposes
-// Are labels in right place?
 import React from 'react';
 import Input from './Input';
 import CustomButton from './CustomButton';
+import ImageField from './ImageField';
 
-export default function Entry() {
+export default function EntryForm() {
   return (
     <div>
       <form className="flex flex-col ml-4">
@@ -26,6 +26,11 @@ export default function Entry() {
         </label>
         <Input className="h-40 mt-5 ml-10 border-2 border-indigo-400 bg-zinc-200 w-80" />
         <CustomButton label="Submit" />
+        <ImageField
+          src="Pfeiffer.JPG"
+          alt="Pfeiffer Beach"
+          className="w-40 h-40 mt-5 ml-10"
+        />
       </form>
     </div>
   );
