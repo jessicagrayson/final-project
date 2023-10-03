@@ -3,7 +3,7 @@
 import React from 'react';
 import Input from './Input';
 import CustomButton from './CustomButton';
-import ImageField from './ImageField';
+// import ImageField from './ImageField';
 
 export default function EntryForm() {
   return (
@@ -26,11 +26,6 @@ export default function EntryForm() {
         </label>
         <Input className="h-40 mt-5 ml-10 border-2 border-indigo-400 bg-zinc-200 w-80" />
         <CustomButton label="Submit" />
-        <ImageField
-          src="Pfeiffer.JPG"
-          alt="Pfeiffer Beach"
-          className="w-40 h-40 mt-5 ml-10"
-        />
       </form>
     </div>
   );

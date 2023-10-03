@@ -56,25 +56,31 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// Entry creation
-// NOTE TO SELF: add image functionality later
+// Entry creation function
 app.post('/api/entryform', async (req, res) => {
   try {
-    const { location, date, blurb } = req.body;
+    const { location, travelDate, blurb, imageUrl } = req.body;
     // Validates entryr form data - throws error if invalid
-    if (!location || date || blurb) {
+    if (!location || !travelDate || !blurb || !imageUrl) {
       throw new ClientError(400, 'all fields are required');
     }
     // Creates sql for new entry
     const insertEntrySql = `
-  insert into "entries"("location", "travelDate", "blurb")
-  values($1, $2, $3)
-  returning "entryId"
-  `;
-    const response = await db.query(insertEntrySql, [location, date, blurb]);
+    insert into "entries" ("location", "travelDate", "blurb", "imageUrl")
+    values($1, $2, $3, $4)
+    returning "entryId"
+    `;
+    const response = await db.query(insertEntrySql, [
+      location,
+      travelDate,
+      blurb,
+      imageUrl,
+    ]);
     // Responds with new entry data
+    res.status(201).json(response.rows[0]);
   } catch (error) {
     console.error(error);
+    return res.status(500).json({ message: `Failed to create entry` });
   }
 });
 

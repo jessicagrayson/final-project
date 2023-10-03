@@ -4,6 +4,7 @@
 - Drag and drop images wf
 - Routing nc
 - Adjust and customize colors wf
+- Connect user and entry via userId
 
 * wishful = wf
 * must have = mh
