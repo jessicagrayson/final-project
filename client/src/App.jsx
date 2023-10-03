@@ -26,7 +26,6 @@ export default function App() {
         <GophrLogo />
         {/* <Form /> */}
         <EntryForm />
-        {/* <ImageField /> */}
       </div>
       <h1>{serverData}</h1>
     </>

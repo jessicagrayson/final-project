@@ -56,6 +56,28 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+// Entry creation
+// NOTE TO SELF: add image functionality later
+app.post('/api/entryform', async (req, res) => {
+  try {
+    const { location, date, blurb } = req.body;
+    // Validates entryr form data - throws error if invalid
+    if (!location || date || blurb) {
+      throw new ClientError(400, 'all fields are required');
+    }
+    // Creates sql for new entry
+    const insertEntrySql = `
+  insert into "entries"("location", "travelDate", "blurb")
+  values($1, $2, $3)
+  returning "entryId"
+  `;
+    const response = await db.query(insertEntrySql, [location, date, blurb]);
+    // Responds with new entry data
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 /**
  * Serves React's index.html if no api route matches.
  *
