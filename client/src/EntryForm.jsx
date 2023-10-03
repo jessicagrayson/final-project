@@ -1,30 +1,95 @@
-// Probably change the name of this at some point
-// Also need to remove mt and ml, just for dev purposes
-import React from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 import CustomButton from './CustomButton';
-// import ImageField from './ImageField';
+import ImageField from './ImageField';
 
 export default function EntryForm() {
+  const [location, setLocation] = useState('');
+  const [travelDate, setTravelDate] = useState('');
+  const [blurb, setBlurb] = useState('');
+  const [imageUrl, setImageUrl] = useState('https://picsum.photos/200/300');
+
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+  };
+
+  const handleTravelDateChange = (e) => {
+    setTravelDate(e.target.value);
+  };
+
+  const handleBlurbChange = (e) => {
+    setBlurb(e.target.value);
+  };
+
+  const handleImageUrlChange = (e) => {
+    setImageUrl(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Creates new entry object from values
+    const newEntry = {
+      location: location,
+      travelDate: travelDate,
+      blurb: blurb,
+      imageUrl: imageUrl,
+    };
+
+    try {
+      const res = await fetch('/api/entryform', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(newEntry),
+      });
+      if (!res.ok) {
+        throw new Error(`Fetch error ${res.status}`);
+      }
+      const entry = await res.json();
+      console.log('Uploaded:', entry);
+    } catch (error) {
+      alert(`Error creating entry:, ${error}`);
+    }
+    // Logs new values
+    console.log('location:', location);
+    console.log('travelDate:', travelDate);
+    console.log('blurb:', blurb);
+    console.log('imageUrl:', imageUrl);
+  };
+
   return (
     <div>
-      <form className="flex flex-col ml-4">
+      <form onSubmit={handleSubmit} className="flex flex-col ml-4">
         <label htmlFor="location" className="text-indigo-600">
           Location
         </label>
-        <Input className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9" />
+        <Input
+          onChange={handleLocationChange}
+          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+        />
         <label htmlFor="date" className="text-indigo-600">
           Date
         </label>
-        <Input className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9" />
+        <Input
+          onChange={handleTravelDateChange}
+          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+        />
         <label htmlFor="url" className="text-indigo-600">
           Image Url
         </label>
-        <Input className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9" />
+        <Input
+          onChange={handleImageUrlChange}
+          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+        />
         <label htmlFor="blurb" className="text-indigo-600">
           Blurb
         </label>
-        <Input className="h-40 mt-5 ml-10 border-2 border-indigo-400 bg-zinc-200 w-80" />
+        <Input
+          onChange={handleBlurbChange}
+          className="h-40 mt-5 ml-10 border-2 border-indigo-400 bg-zinc-200 w-80"
+        />
+        <ImageField src={imageUrl} />
         <CustomButton label="Submit" />
       </form>
     </div>

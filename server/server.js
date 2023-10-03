@@ -60,7 +60,7 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/entryform', async (req, res) => {
   try {
     const { location, travelDate, blurb, imageUrl } = req.body;
-    // Validates entryr form data - throws error if invalid
+    // Validates entry form data - throws error if invalid
     if (!location || !travelDate || !blurb || !imageUrl) {
       throw new ClientError(400, 'all fields are required');
     }
