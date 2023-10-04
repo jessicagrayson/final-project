@@ -7,7 +7,7 @@ export default function EntryForm() {
   const [location, setLocation] = useState('');
   const [travelDate, setTravelDate] = useState('');
   const [blurb, setBlurb] = useState('');
-  const [imageUrl, setImageUrl] = useState('https://picsum.photos/200/300');
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
@@ -26,6 +26,7 @@ export default function EntryForm() {
   };
 
   const handleSubmit = async (e) => {
+    // Remove this preventDefault when done testing
     e.preventDefault();
     // Creates new entry object from values
     const newEntry = {
@@ -51,11 +52,6 @@ export default function EntryForm() {
     } catch (error) {
       alert(`Error creating entry:, ${error}`);
     }
-    // Logs new values
-    console.log('location:', location);
-    console.log('travelDate:', travelDate);
-    console.log('blurb:', blurb);
-    console.log('imageUrl:', imageUrl);
   };
 
   return (

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars  -- Remove when used */
 import 'dotenv/config';
 import express from 'express';
 import argon2 from 'argon2';
@@ -8,7 +7,6 @@ import { ClientError, errorMiddleware } from './lib/index.js';
 const connectionString =
   process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
-// eslint-disable-next-line no-unused-vars -- Remove when used
 const db = new pg.Pool({
   connectionString,
   ssl: {
@@ -66,9 +64,9 @@ app.post('/api/entryform', async (req, res) => {
     }
     // Creates sql for new entry
     const insertEntrySql = `
-    insert into "entries" ("location", "travelDate", "blurb", "imageUrl")
-    values($1, $2, $3, $4)
-    returning "entryId"
+    INSERT INTO "entries" ("location", "travelDate", "blurb", "imageUrl")
+    VALUES ($1, $2, $3, $4)
+    RETURNING "blurb"
     `;
     const response = await db.query(insertEntrySql, [
       location,
@@ -104,8 +102,8 @@ app.listen(process.env.PORT, () => {
 });
 
 // Validation functions
-function validateRegistration(username, password) {
-  if (!username || !password) {
-    throw new ClientError(400, 'Username and password are required fields');
-  }
-}
+// function validateRegistration(username, password) {
+//   if (!username || !password) {
+//     throw new ClientError(400, 'Username and password are required fields');
+//   }
+// }
