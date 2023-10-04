@@ -1,27 +1,81 @@
-import React from 'react';
-import ImageField from './ImageField';
-import LinkComponent from './LinkComponent';
-import Input from './Input';
-import { BlurbComponent } from './BlurbComponent';
+// import React, { useState } from 'react';
+// import ImageField from './ImageField';
+// import LinkComponent from './LinkComponent';
+// import Input from './Input';
+// import BlurbComponent from './BlurbComponent';
 
-export default function Entry() {
-  return (
-    <div className="flex flex-col">
-      <Input value={'Orange County, CA'} className="text-indigo-400" />
-      <Input value={'October 4, 2023'} className="text-indigo-400" />
+// export default function Entry() {
+//   const [location, setLocation] = useState('');
+//   const [travelDate, setTravelDate] = useState('');
+//   const [blurb, setBlurb] = useState('');
+//   const [imageUrl, setImageUrl] = useState('');
 
-      <ImageField src={'https://picsum.photos/200/300'} />
-      <BlurbComponent
-        className=""
-        value={
-          '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."'
-        }
-      />
-      <LinkComponent
-        href={'#'}
-        placeholder={'Back'}
-        className="text-indigo-500"
-      />
-    </div>
-  );
-}
+//   const handleLocationChange = (e) => {
+//     setLocation(e.target.value);
+//   };
+
+//   const handleTravelDateChange = (e) => {
+//     setTravelDate(e.target.value);
+//   };
+
+//   const handleBlurbChange = (e) => {
+//     setBlurb(e.target.value);
+//   };
+
+//   const handleImageUrlChange = (e) => {
+//     setImageUrl(e.target.value);
+//   };
+
+//   const handleEntrySelection = async () => {
+//     // Change this later to be a template literal
+//     const entryId = 1;
+
+//     try {
+//       const res = await fetch(`/api/entries/${entryId}`, {
+//         method: 'GET',
+//         headers: {
+//           'Content-type': 'application/json',
+//         },
+//       });
+//       if (!res.ok) {
+//         throw new Error(`Fetch error ${res.status}`);
+//       }
+//       const entry = await res.json();
+//       console.log('Fetched entry:', entry);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <form className="flex flex-col">
+//         <Input
+//           onChange={handleLocationChange}
+//           className="text-indigo-400"
+//           placeholder="Location"
+//         />
+//         <Input
+//           onChange={handleTravelDateChange}
+//           className="text-indigo-400"
+//           placeholder="Travel Date"
+//         />
+//         <ImageField
+//           onChange={handleImageUrlChange}
+//           src={imageUrl}
+//           placeholder="Image URL"
+//         />
+//         <BlurbComponent
+//           onChange={handleBlurbChange}
+//           className="text-black"
+//           placeholder="Blurb"
+//         />
+//         <LinkComponent
+//           href={'#'}
+//           placeholder={'Back'}
+//           className="text-indigo-500"
+//         />
+//       </form>
+//     </div>
+//   );
+// }
