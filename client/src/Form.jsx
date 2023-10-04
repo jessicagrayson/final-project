@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from './Input';
-import SignInBtn from './SignInBtn';
+import CustomButton from './CustomButton';
 
 export default function Form() {
   const [username, setUsername] = useState('');
@@ -47,6 +47,7 @@ export default function Form() {
 
   return (
     <div>
+      {/* Should this label be inside the form?  */}
       <label htmlFor="username" className="text-indigo-600">
         Username:
       </label>
@@ -67,7 +68,8 @@ export default function Form() {
           placeholder={''}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
-        <SignInBtn />
+
+        <CustomButton label="Sign Up" />
       </form>
     </div>
   );

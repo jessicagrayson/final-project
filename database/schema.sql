@@ -24,4 +24,4 @@ CREATE TABLE "entries" (
   "blurb" text
 );
 
-ALTER TABLE "entries" ADD FOREIGN KEY ("entryId") REFERENCES "users" ("userId");
+ALTER TABLE "entries" ADD FOREIGN KEY ("userId") REFERENCES "users" ("userId");
