@@ -111,11 +111,17 @@ app.get('/api/entries/:entryId', async (req, res) => {
 // GETS all entries
 app.get('/api/entries', async (req, res) => {
   try {
-    const sql = `SELECT * from "entries"`;
-    const entries = await db.query(sql);
-    if (entries.length === 0) {
+    const sql = `
+    SELECT * from "entries"
+    `;
+
+    const result = await db.query(sql);
+    const entries = result.rows;
+
+    if (!entries) {
       return res.status(404).json({ error: 'No entries found' });
     }
+
     res.status(200).json(entries);
   } catch (error) {
     console.error(error);
