@@ -9,7 +9,6 @@ export default function Entry() {
   const [travelDate, setTravelDate] = useState('');
   const [blurb, setBlurb] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  // Change the entryId value to empty string after testing
   const [entryId, setEntryId] = useState('');
 
   const fetchEntry = async (entryId) => {
@@ -28,12 +27,12 @@ export default function Entry() {
     }
   };
 
-  // Delete this after saving
-  setEntryId;
+  const handleEntryClick = () => {
+    setEntryId('');
+  };
 
   useEffect(() => {
     if (entryId) {
-      // Can I do (!entryId) here?
       fetchEntry(entryId);
     } else {
       setLocation('');
@@ -44,7 +43,7 @@ export default function Entry() {
   }, [entryId]);
 
   return (
-    <div>
+    <div onClick={handleEntryClick}>
       <form className="flex flex-col">
         <Input
           onChange={(e) => setLocation(e.target.value)}
