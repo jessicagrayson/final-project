@@ -54,7 +54,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// Entry creation function
+// POSTS new entry
 app.post('/api/entryform', async (req, res) => {
   try {
     const { location, travelDate, blurb, imageUrl } = req.body;
@@ -82,7 +82,7 @@ app.post('/api/entryform', async (req, res) => {
   }
 });
 
-// GETS entry values
+// GETS entry values by id
 app.get('/api/entries/:entryId', async (req, res) => {
   try {
     const entryId = Number(req.params.entryId);
@@ -105,6 +105,21 @@ app.get('/api/entries/:entryId', async (req, res) => {
     res.status(200).json(entry);
   } catch (error) {
     console.error(error);
+  }
+});
+
+// GETS all entries
+app.get('/api/entries', async (req, res) => {
+  try {
+    const sql = `SELECT * from "entries"`;
+    const entries = await db.query(sql);
+    if (entries.length === 0) {
+      return res.status(404).json({ error: 'No entries found' });
+    }
+    res.status(200).json(entries);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
