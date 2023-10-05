@@ -1,23 +1,32 @@
-// app.post('/api/register', async (req, res) => {
+// // Entry creation function
+// app.post('/api/entryform', async (req, res) => {
 //   try {
-//     const { username, password } = req.body;
-//     // Validates registration data - throws error if invalid
-//     if (!username || !password) {
-//       throw new ClientError(400, 'username and password required');
+//     const { location, travelDate, blurb, imageUrl } = req.body;
+//     // Validates entry form data - throws error if invalid
+//     if (!location || !travelDate || !blurb || !imageUrl) {
+//       throw new ClientError(400, 'all fields are required');
 //     }
-//     // Hashes user's password using argon
-//     const hashedPassword = await argon2.hash(password);
-//     // Creates sql for new user and inserts into database
-//     const insertUserSql = `INSERT INTO "users"("username", "hashedPassword")
-//     VALUES($1, $2)
-//     RETURNING "userId", "username"
+//     // Creates sql for new entry
+//     const insertEntrySql = `
+//     INSERT INTO "entries" ("location", "travelDate", "blurb", "imageUrl")
+//     VALUES ($1, $2, $3, $4)
+//     RETURNING "blurb"
 //     `;
-//     const response = await db.query(insertUserSql, [username, hashedPassword]);
-//     // Responds w/ new user data
+//     const response = await db.query(insertEntrySql, [
+//       location,
+//       travelDate,
+//       blurb,
+//       imageUrl,
+//     ]);
+//     // Responds with new entry data
 //     res.status(201).json(response.rows[0]);
-//     // Handles error
 //   } catch (error) {
 //     console.error(error);
-//     return res.status(500).json({ message: 'Failed to register' });
+//     return res.status(500).json({ message: `Failed to create entry` });
 //   }
+// });
+
+// // Get
+// app.get('/api/hello', (req, res) => {
+//   res.json({ message: 'Delete me!' });
 // });
