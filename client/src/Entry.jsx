@@ -9,7 +9,8 @@ export default function Entry() {
   const [travelDate, setTravelDate] = useState('');
   const [blurb, setBlurb] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [entryId, setEntryId] = useState('');
+  // Default value should be an empty string - update when testing is complete
+  const [entryId, setEntryId] = useState(1);
 
   const fetchEntry = async (entryId) => {
     try {
@@ -28,7 +29,7 @@ export default function Entry() {
   };
 
   const handleEntryClick = () => {
-    setEntryId('');
+    setEntryId(1);
   };
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function Entry() {
   }, [entryId]);
 
   return (
-    <div onClick={handleEntryClick}>
+    <div>
       <form className="flex flex-col">
         <Input
           onChange={(e) => setLocation(e.target.value)}
@@ -69,10 +70,12 @@ export default function Entry() {
           placeholder="Blurb"
           value={blurb}
         />
+        {/* This link will be a back link, update when done testing */}
         <LinkComponent
           href={'#'}
-          placeholder={'Back'}
+          placeholder={'testing entry render'}
           className="text-indigo-500"
+          onClick={handleEntryClick}
         />
       </form>
     </div>
