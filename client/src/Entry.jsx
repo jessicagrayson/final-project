@@ -70,10 +70,10 @@ export default function Entry() {
           placeholder="Blurb"
           value={blurb}
         />
-        {/* This link will be a back link, update when done testing */}
+        {/* This link will be an expand link, update when done testing */}
         <LinkComponent
           href={'#'}
-          placeholder={'testing entry render'}
+          placeholder={'Expand (link)'}
           className="text-indigo-500"
           onClick={handleEntryClick}
         />
