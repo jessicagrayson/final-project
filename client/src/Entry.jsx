@@ -1,81 +1,81 @@
-// import React, { useState } from 'react';
-// import ImageField from './ImageField';
-// import LinkComponent from './LinkComponent';
-// import Input from './Input';
-// import BlurbComponent from './BlurbComponent';
+import React, { useState, useEffect } from 'react';
+import ImageField from './ImageField';
+import LinkComponent from './LinkComponent';
+import Input from './Input';
+import BlurbComponent from './BlurbComponent';
 
-// export default function Entry() {
-//   const [location, setLocation] = useState('');
-//   const [travelDate, setTravelDate] = useState('');
-//   const [blurb, setBlurb] = useState('');
-//   const [imageUrl, setImageUrl] = useState('');
+export default function Entry() {
+  const [location, setLocation] = useState('');
+  const [travelDate, setTravelDate] = useState('');
+  const [blurb, setBlurb] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  // Change the entryId value to empty string after testing
+  const [entryId, setEntryId] = useState('');
 
-//   const handleLocationChange = (e) => {
-//     setLocation(e.target.value);
-//   };
+  const fetchEntry = async (entryId) => {
+    try {
+      const res = await fetch(`/api/entries/${entryId}`);
+      if (!res.ok) {
+        throw new Error('Network response was not okay');
+      }
+      const entryData = await res.json();
+      setLocation(entryData.location);
+      setTravelDate(entryData.travelDate);
+      setBlurb(entryData.blurb);
+      setImageUrl(entryData.imageUrl);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-//   const handleTravelDateChange = (e) => {
-//     setTravelDate(e.target.value);
-//   };
+  // Delete this after saving
+  setEntryId;
 
-//   const handleBlurbChange = (e) => {
-//     setBlurb(e.target.value);
-//   };
+  useEffect(() => {
+    if (entryId) {
+      // Can I do (!entryId) here?
+      fetchEntry(entryId);
+    } else {
+      setLocation('');
+      setTravelDate('');
+      setBlurb('');
+      setImageUrl('');
+    }
+  }, [entryId]);
 
-//   const handleImageUrlChange = (e) => {
-//     setImageUrl(e.target.value);
-//   };
-
-//   const handleEntrySelection = async () => {
-//     // Change this later to be a template literal
-//     const entryId = 1;
-
-//     try {
-//       const res = await fetch(`/api/entries/${entryId}`, {
-//         method: 'GET',
-//         headers: {
-//           'Content-type': 'application/json',
-//         },
-//       });
-//       if (!res.ok) {
-//         throw new Error(`Fetch error ${res.status}`);
-//       }
-//       const entry = await res.json();
-//       console.log('Fetched entry:', entry);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <form className="flex flex-col">
-//         <Input
-//           onChange={handleLocationChange}
-//           className="text-indigo-400"
-//           placeholder="Location"
-//         />
-//         <Input
-//           onChange={handleTravelDateChange}
-//           className="text-indigo-400"
-//           placeholder="Travel Date"
-//         />
-//         <ImageField
-//           onChange={handleImageUrlChange}
-//           src={imageUrl}
-//           placeholder="Image URL"
-//         />
-//         <BlurbComponent
-//           onChange={handleBlurbChange}
-//           className="text-black"
-//           placeholder="Blurb"
-//         />
-//         <LinkComponent
-//           href={'#'}
-//           placeholder={'Back'}
-//           className="text-indigo-500"
-//         />
-//       </form>
-//     </div>
-//   );
-// }
+  return (
+    <div>
+      <form className="flex flex-col">
+        <Input
+          onChange={(e) => setLocation(e.target.value)}
+          className="text-indigo-400"
+          placeholder="Location"
+          value={location}
+        />
+        <Input
+          onChange={(e) => setTravelDate(e.target.value)}
+          className="text-indigo-400"
+          placeholder="Travel Date"
+          value={travelDate}
+        />
+        <ImageField
+          onChange={(e) => setImageUrl(e.target.value)}
+          src={imageUrl}
+          placeholder="Image URL"
+          value={imageUrl}
+        />
+        <BlurbComponent
+          onChange={(e) => setBlurb(e.target.value)}
+          className="text-black"
+          placeholder="Blurb"
+          value={blurb}
+        />
+        <LinkComponent
+          href={'#'}
+          placeholder={'Back'}
+          className="text-indigo-500"
+        />
+      </form>
+    </div>
+  );
+}
