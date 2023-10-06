@@ -9,7 +9,8 @@ export default function Entry() {
   const [travelDate, setTravelDate] = useState('');
   const [blurb, setBlurb] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [entryId, setEntryId] = useState('');
+  // Set default to null later
+  const [entryId, setEntryId] = useState(null);
 
   const fetchEntry = async (entryId) => {
     try {
@@ -18,7 +19,8 @@ export default function Entry() {
         throw new Error('Network response was not okay');
       }
       const entryData = await res.json();
-      setEntryId(entryData.entryId);
+      console.log(entryData);
+      // setEntryId(entryData.entryId);
       setLocation(entryData.location);
       setTravelDate(entryData.travelDate);
       setBlurb(entryData.blurb);
@@ -36,8 +38,9 @@ export default function Entry() {
     if (entryId) {
       fetchEntry(entryId);
     } else {
-      setEntryId('');
-      setLocation('');
+      //  It's something to do with this section
+      setEntryId(4);
+      setLocation('hello world');
       setTravelDate('');
       setBlurb('');
       setImageUrl('');

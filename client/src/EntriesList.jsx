@@ -4,6 +4,7 @@ import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
   const [entries, setEntries] = useState([]);
+  // const [entryId, setEntryId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +14,9 @@ export default function EntriesList() {
           throw new Error('Failed to fetch data');
         }
         const data = await res.json();
+        console.log('before:', data);
         setEntries(data);
+        console.log('after:', data);
       } catch (error) {
         console.error(error);
       }
@@ -32,11 +35,12 @@ export default function EntriesList() {
 
       {entries.map((entry) => (
         <Entry
+          // onChange={() => setEntryId(entryId)}
           key={entry.entryId}
-          location={entry.location}
-          travelDate={entry.travelDate}
-          blurb={entry.blurb}
-          imageUrl={entry.imageUrl}
+          // location={entry.location}
+          // travelDate={entry.travelDate}
+          // blurb={entry.blurb}
+          // imageUrl={entry.imageUrl}
         />
       ))}
 
