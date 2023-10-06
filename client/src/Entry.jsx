@@ -9,8 +9,7 @@ export default function Entry() {
   const [travelDate, setTravelDate] = useState('');
   const [blurb, setBlurb] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  // Default value should be an empty string - update when testing is complete
-  const [entryId, setEntryId] = useState(1);
+  const [entryId, setEntryId] = useState('');
 
   const fetchEntry = async (entryId) => {
     try {
@@ -19,6 +18,7 @@ export default function Entry() {
         throw new Error('Network response was not okay');
       }
       const entryData = await res.json();
+      setEntryId(entryData.entryId);
       setLocation(entryData.location);
       setTravelDate(entryData.travelDate);
       setBlurb(entryData.blurb);
@@ -29,13 +29,14 @@ export default function Entry() {
   };
 
   const handleEntryClick = () => {
-    setEntryId(1);
+    setEntryId('');
   };
 
   useEffect(() => {
     if (entryId) {
       fetchEntry(entryId);
     } else {
+      setEntryId('');
       setLocation('');
       setTravelDate('');
       setBlurb('');
