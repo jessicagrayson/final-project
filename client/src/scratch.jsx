@@ -93,3 +93,22 @@
 //     </div>
 //   );
 // }
+
+///
+
+// const [entries, setEntries] = useState('');
+
+// useEffect(() => {
+//   async function fetchEntries() {
+//     try {
+//       const res = await fetch(`/api/entries`);
+//       if (!res.ok) throw new Error(`fetch error: ${res.status}`);
+//       const entries = await res.json();
+//       setEntries(entries);
+//     } catch (error) {
+//       throw new Error('fetch error');
+//     }
+//   }
+//   fetchEntries();
+// }, []);
+// console.log(entry);

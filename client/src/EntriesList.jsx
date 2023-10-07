@@ -38,11 +38,6 @@ export default function EntriesList() {
           // onChange={() => setEntryId(entryId)}
           key={entry.entryId}
           entry={entry}
-          // entryId={entry.entryId}
-          // location={entry.location}
-          // travelDate={entry.travelDate}
-          // blurb={entry.blurb}
-          // imageUrl={entry.imageUrl}
         />
       ))}
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 // import Form from './Form.jsx';
 // import EntryForm from './EntryForm.jsx';
 // import Entry from './Entry.jsx';
+// import EntryView from './EntryView.jsx';
 import EntriesList from './EntriesList.jsx';
 import GophrLogo from './GophrLogo.jsx';
 import './App.css';
@@ -29,6 +30,7 @@ export default function App() {
         {/* <Form /> */}
         {/* <EntryForm /> */}
         {/* <Entry /> */}
+        {/* <EntryView /> */}
         <EntriesList />
       </div>
       <h1>{serverData}</h1>
