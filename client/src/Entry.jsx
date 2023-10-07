@@ -21,6 +21,12 @@ export default function Entry({ entry }) {
   //   fetchEntries();
   // }, []);
   // console.log(entry);
+
+  function handleClick() {
+    // This needs to be changed later - functional for now.
+    console.log('clicked');
+  }
+
   return (
     <div>
       <form className="flex flex-col">
@@ -28,21 +34,25 @@ export default function Entry({ entry }) {
           className="text-indigo-400"
           placeholder="Location"
           value={entry.location}
+          onChange={handleClick}
         />
         <Input
           className="text-indigo-400"
           placeholder="Travel Date"
           value={entry.travelDate}
+          onChange={handleClick}
         />
         <ImageField
           src={entry.imageUrl}
           placeholder="Image URL"
           value={entry.imageUrl}
+          onChange={handleClick}
         />
         <BlurbComponent
           className="text-black"
           placeholder="Blurb"
           value={entry.blurb}
+          onChange={handleClick}
         />
         {/* This link will be an expand link, update when done testing */}
         <LinkComponent
