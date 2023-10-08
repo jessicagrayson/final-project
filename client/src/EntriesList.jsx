@@ -27,25 +27,15 @@ export default function EntriesList() {
   return (
     <div>
       <LinkComponent
-        href={'#'}
-        placeholder={'Create New (link)'}
+        to="/create-entry"
+        placeholder="Create New Entry"
         className="text-indigo-500"
       />
+      <LinkComponent to="/" placeholder="Back" className="text-indigo-500" />
 
       {entries.map((entry) => (
-        // console.log(entry)
-        <Entry
-          // onChange={() => setEntryId(entryId)}
-          key={entry.entryId}
-          entry={entry}
-        />
+        <Entry key={entry.entryId} entry={entry} />
       ))}
-
-      <LinkComponent
-        href={'#'}
-        placeholder={'Back (link)'}
-        className="text-indigo-500"
-      />
     </div>
   );
 }

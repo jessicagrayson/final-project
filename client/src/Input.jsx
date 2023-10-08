@@ -6,6 +6,9 @@ export default function Input({
   value,
   onChange,
   className,
+  id,
+  name,
+  autoComplete,
 }) {
   return (
     <input
@@ -14,6 +17,9 @@ export default function Input({
       value={value}
       onChange={onChange}
       className={className}
+      id={id}
+      name={name}
+      autoComplete={autoComplete}
     />
   );
 }

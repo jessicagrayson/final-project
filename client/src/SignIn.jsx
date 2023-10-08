@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Input from './Input';
 import CustomButton from './CustomButton';
+import LinkComponent from './LinkComponent';
 
-export default function Form() {
+export default function SignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -47,15 +48,17 @@ export default function Form() {
 
   return (
     <div>
-      {/* Should this label be inside the form?  */}
-      <label htmlFor="username" className="text-indigo-600">
-        Username:
-      </label>
       <form onSubmit={handleSubmit} className="flex flex-col">
+        <label htmlFor="username" className="text-indigo-600">
+          Username:
+        </label>
         <Input
+          id="username"
+          name="username"
           onChange={handleUsernameChange}
           type={'text'}
           placeholder={''}
+          autoComplete="username"
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <label htmlFor="password" className="text-indigo-600">
@@ -63,14 +66,21 @@ export default function Form() {
         </label>
 
         <Input
+          id="password"
+          name="password"
           onChange={handlePasswordChange}
           type={'password'}
           placeholder={''}
+          autoComplete="current-password"
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
-
         <CustomButton label="Sign Up" />
       </form>
+      <LinkComponent
+        to="/list"
+        className="text-indigo-600"
+        placeholder="See all entries"
+      />
     </div>
   );
 }
