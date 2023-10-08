@@ -31,12 +31,11 @@ export default function EntriesList() {
         placeholder="Create New Entry"
         className="text-indigo-500"
       />
+      <LinkComponent to="/" placeholder="Back" className="text-indigo-500" />
 
       {entries.map((entry) => (
         <Entry key={entry.entryId} entry={entry} />
       ))}
-
-      <LinkComponent to="/" placeholder="Back" className="text-indigo-500" />
     </div>
   );
 }
