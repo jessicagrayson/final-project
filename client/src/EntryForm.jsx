@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import ImageField from './ImageField';
+import LinkComponent from './LinkComponent';
 
 export default function EntryForm() {
   const [location, setLocation] = useState('');
@@ -56,6 +57,12 @@ export default function EntryForm() {
 
   return (
     <div>
+      <LinkComponent
+        to="/list"
+        placeholder="Back"
+        className="text-indigo-500"
+      />
+
       <form onSubmit={handleSubmit} className="flex flex-col ml-4">
         <label htmlFor="location" className="text-indigo-600">
           Location
