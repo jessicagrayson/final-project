@@ -1,32 +1,25 @@
-// // Entry creation function
-// app.post('/api/entryform', async (req, res) => {
+// // GETS entry values by id
+// app.get('/api/entries/:entryId', async (req, res) => {
 //   try {
-//     const { location, travelDate, blurb, imageUrl } = req.body;
-//     // Validates entry form data - throws error if invalid
-//     if (!location || !travelDate || !blurb || !imageUrl) {
-//       throw new ClientError(400, 'all fields are required');
+//     const entryId = Number(req.params.entryId);
+//     if (!Number.isInteger(entryId) || entryId <= 0) {
+//       throw new ClientError(400, '"entryId" must be an integer');
 //     }
-//     // Creates sql for new entry
-//     const insertEntrySql = `
-//     INSERT INTO "entries" ("location", "travelDate", "blurb", "imageUrl")
-//     VALUES ($1, $2, $3, $4)
-//     RETURNING "blurb"
+//     const sql = `
+//     SELECT * from "entries"
+//     WHERE "entryId" = $1
 //     `;
-//     const response = await db.query(insertEntrySql, [
-//       location,
-//       travelDate,
-//       blurb,
-//       imageUrl,
-//     ]);
-//     // Responds with new entry data
-//     res.status(201).json(response.rows[0]);
+
+//     const params = [entryId];
+//     const result = await db.query(sql, params);
+//     const entry = result.rows[0];
+
+//     if (!entry) {
+//       throw new ClientError(404, `Cannot find entry with ID ${entryId}`);
+//     }
+
+//     res.status(200).json(entry);
 //   } catch (error) {
 //     console.error(error);
-//     return res.status(500).json({ message: `Failed to create entry` });
 //   }
-// });
-
-// // Get
-// app.get('/api/hello', (req, res) => {
-//   res.json({ message: 'Delete me!' });
 // });
