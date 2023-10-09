@@ -1,41 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Entry from './Entry';
+import LinkComponent from './LinkComponent';
 
-export default function EntryView({ entryId, onChange }) {
-  const [entry, setEntry] = useState({});
-
-  const fetchEntry = async (entryId) => {
-    try {
-      const res = await fetch(`/api/entries/${entryId}`);
-      if (!res.ok) {
-        throw new Error('Network response was not okay');
-      }
-      const entryData = await res.json();
-      console.log(entryData);
-      setEntry(entryData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+export default function EntryView() {
+  const [entry, setEntry] = useState();
+  const { entryId } = useParams();
 
   useEffect(() => {
-    alert('made it!');
+    const fetchEntry = async () => {
+      try {
+        const res = await fetch(`/api/entries/${entryId}`);
+
+        if (!res.ok) {
+          throw new Error('Network response was not okay');
+        }
+
+        const entryData = await res.json();
+        setEntry(entryData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     if (entryId) {
-      fetchEntry(entryId);
-      console.log(entryId);
+      fetchEntry();
     }
   }, [entryId]);
 
-  function handleSelect() {
-    if (onChange) {
-      onChange(entryId);
-    }
+  if (!entry) {
+    return <div>Is loading</div>;
   }
-  console.log(entry);
 
   return (
     <div>
-      <Entry entry={entry} onChange={handleSelect} />
+      <Entry entry={entry} />
+      <LinkComponent
+        to="/list"
+        placeholder="Back"
+        className="text-indigo-500"
+      />
     </div>
   );
 }

@@ -13,9 +13,7 @@ export default function EntriesList() {
           throw new Error('Failed to fetch data');
         }
         const data = await res.json();
-        console.log('before:', data);
         setEntries(data);
-        console.log('after:', data);
       } catch (error) {
         console.error(error);
       }

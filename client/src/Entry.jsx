@@ -6,7 +6,7 @@ import BlurbComponent from './BlurbComponent';
 import EntryView from './EntryView';
 
 export default function Entry({ entry }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState();
 
   const handleExpandClick = useCallback(() => {
     setExpanded(!expanded);
@@ -48,6 +48,7 @@ export default function Entry({ entry }) {
       </form>
       {expanded && (
         <EntryView
+          entry={entry}
           entryId={entry.entryId}
           onChange={() => setExpanded(false)}
         />
