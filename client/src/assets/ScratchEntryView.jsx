@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Entry from './Entry';
 import LinkComponent from './LinkComponent';
+import Entry from './Entry';
 
 export default function EntryView({ entryId, onChange }) {
-  const [entry, setEntry] = useState({});
+  const [entry, setEntry] = useState('');
 
   const fetchEntry = async (entryId) => {
     try {
+      console.log('inside:', entryId);
       const res = await fetch(`/api/entries/${entryId}`);
       if (!res.ok) {
         throw new Error('Network response was not okay');
       }
       const entryData = await res.json();
-      console.log(entryData);
+      console.log('data:', entryData);
+      console.log('entry:', entry);
       setEntry(entryData);
     } catch (error) {
       console.error(error);
@@ -31,7 +33,7 @@ export default function EntryView({ entryId, onChange }) {
       onChange(entryId);
     }
   }
-  console.log(entry);
+  console.log('entryId:', entryId);
 
   return (
     <div>
