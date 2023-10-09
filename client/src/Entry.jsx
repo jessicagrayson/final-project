@@ -48,6 +48,7 @@ export default function Entry({ entry }) {
       </form>
       {expanded && (
         <EntryView
+          entry={entry}
           entryId={entry.entryId}
           onChange={() => setExpanded(false)}
         />
