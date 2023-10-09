@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Entry from './Entry';
 
 export default function EntryView({ entryId, onChange }) {
-  const [entry, setEntry] = useState([]);
+  const [entry, setEntry] = useState({});
 
   const fetchEntry = async (entryId) => {
     try {
@@ -19,8 +19,10 @@ export default function EntryView({ entryId, onChange }) {
   };
 
   useEffect(() => {
+    alert('made it!');
     if (entryId) {
       fetchEntry(entryId);
+      console.log(entryId);
     }
   }, [entryId]);
 
@@ -29,6 +31,7 @@ export default function EntryView({ entryId, onChange }) {
       onChange(entryId);
     }
   }
+  console.log(entry);
 
   return (
     <div>
