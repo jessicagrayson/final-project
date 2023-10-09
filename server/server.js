@@ -25,9 +25,9 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Delete me!' });
-});
+// app.get('/api/hello', (req, res) => {
+//   res.json({ message: 'Delete me!' });
+// });
 
 // Account registration function
 app.post('/api/register', async (req, res) => {
@@ -129,6 +129,36 @@ app.get('/api/entries', async (req, res) => {
   }
 });
 
+// PUT (updates) an entry by id
+app.put('/api/update/:entryId', async (req, res) => {
+  try {
+    const entryId = Number(req.params.entryId);
+    validateEntryId(entryId);
+    const { imageUrl, location, travelDate, blurb } = req.body;
+
+    // Create sql object
+    const sql = `
+    UPDATE "entries"
+    SET "imageUrl" = $2,
+    "location" = $3,
+    "travelDate" = $4,
+    "blurb" = $5
+    WHERE "entryId" = $1
+    RETURNING *
+`;
+    // Set query params
+    const params = [entryId, imageUrl, location, travelDate, blurb];
+    const result = await db.query(sql, params);
+    const entry = result.rows[0];
+    if (!entry) {
+      throw new ClientError(404, `Cannot find entry with "entryId" ${entryId}`);
+    }
+    res.json(entry);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 /**
  * Serves React's index.html if no api route matches.
  *
@@ -149,8 +179,8 @@ app.listen(process.env.PORT, () => {
 });
 
 // Validation functions
-// function validateRegistration(username, password) {
-//   if (!username || !password) {
-//     throw new ClientError(400, 'Username and password are required fields');
-//   }
-// }
+function validateEntryId(entryId) {
+  if (!Number.isInteger(entryId) || entryId <= 0) {
+    throw new ClientError(400, 'entryId must be a positive integer');
+  }
+}
