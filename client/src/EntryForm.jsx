@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 
-export default function EntryForm({ entry }) {
-  const [location, setLocation] = useState('');
-  const [travelDate, setTravelDate] = useState('');
-  const [blurb, setBlurb] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+export default function EntryForm() {
+  const loc = useLocation();
+  const entry = loc.state?.entry;
+  // Entry state variables
+  const [location, setLocation] = useState(entry?.location ?? '');
+  const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
+  const [blurb, setBlurb] = useState(entry?.blurb ?? '');
+  const [imageUrl, setImageUrl] = useState(entry?.imageUrl ?? '');
 
+  console.log('loc:', loc);
+  console.log('loc.state:', loc.state);
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };

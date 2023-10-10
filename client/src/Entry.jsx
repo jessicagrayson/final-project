@@ -3,7 +3,7 @@ import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import Input from './Input';
 import BlurbComponent from './BlurbComponent';
-import EntryView from './EntryView';
+// import EntryView from './EntryView';
 
 export default function Entry({ entry }) {
   const [expanded, setExpanded] = useState(false);
@@ -46,12 +46,12 @@ export default function Entry({ entry }) {
           className="text-indigo-500"
         />
       </form>
-      {expanded && (
+      {/* {expanded && (
         <EntryView
           entryId={entry.entryId}
           onChange={() => setExpanded(false)}
         />
-      )}
+      )} */}
     </div>
   );
 }
