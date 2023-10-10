@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Entry from './Entry';
 import LinkComponent from './LinkComponent';
-import EntryForm from './EntryForm';
 
 export default function EntryView() {
   const [entry, setEntry] = useState();
@@ -52,12 +51,11 @@ export default function EntryView() {
       />
       <LinkComponent
         onClick={() => setIsClicked(!isClicked)}
-        to="/update/:entryId"
+        to="/create-entry"
         entry={entry}
         placeholder="Edit Entry"
         className="text-indigo-500"
       />
-      {!isClicked ? <EntryForm entry={entry} /> : null}
     </div>
   );
 }
