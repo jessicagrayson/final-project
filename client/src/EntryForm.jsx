@@ -4,7 +4,7 @@ import CustomButton from './CustomButton';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 
-export default function EntryForm() {
+export default function EntryForm({ entry }) {
   const [location, setLocation] = useState('');
   const [travelDate, setTravelDate] = useState('');
   const [blurb, setBlurb] = useState('');
@@ -54,6 +54,7 @@ export default function EntryForm() {
       alert(`Error creating entry:, ${error}`);
     }
   };
+  console.log('entry test:', entry);
 
   return (
     <div>
@@ -70,6 +71,7 @@ export default function EntryForm() {
         <Input
           onChange={handleLocationChange}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+          // value={entry.location}
         />
         <label htmlFor="date" className="text-indigo-600">
           Date

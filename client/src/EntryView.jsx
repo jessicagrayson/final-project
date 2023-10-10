@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Entry from './Entry';
 import LinkComponent from './LinkComponent';
+import EntryForm from './EntryForm';
 
 export default function EntryView() {
   const [entry, setEntry] = useState();
   const { entryId } = useParams();
+  const [isClicked, setIsClicked] = useState(false);
 
   // Fetches entry by entryId
   useEffect(() => {
@@ -33,6 +35,12 @@ export default function EntryView() {
     return <div>Loading...</div>;
   }
 
+  if (!isClicked) {
+    setIsClicked(!isClicked);
+    const updateEntry = entry;
+    console.log('UPDATE:', updateEntry);
+  }
+
   return (
     <div>
       <Entry entry={entry} />
@@ -41,7 +49,14 @@ export default function EntryView() {
         placeholder="Back"
         className="text-indigo-500"
       />
-      <LinkComponent placeholder="Edit Entry" className="text-indigo-500" />
+      <LinkComponent
+        onClick={() => setIsClicked(!isClicked)}
+        to="/create-entry"
+        entry={entry}
+        placeholder="Edit Entry"
+        className="text-indigo-500"
+      />
+      {!isClicked ? <EntryForm entry={entry} /> : null}
     </div>
   );
 }
