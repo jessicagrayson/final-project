@@ -7,6 +7,7 @@ export default function EntryView() {
   const [entry, setEntry] = useState();
   const { entryId } = useParams();
 
+  // Fetches entry by entryId
   useEffect(() => {
     const fetchEntry = async () => {
       try {
@@ -29,7 +30,7 @@ export default function EntryView() {
   }, [entryId]);
 
   if (!entry) {
-    return <div>Is loading</div>;
+    return <div>Loading...</div>;
   }
 
   return (
