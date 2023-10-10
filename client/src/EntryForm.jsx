@@ -71,7 +71,6 @@ export default function EntryForm({ entry }) {
         <Input
           onChange={handleLocationChange}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
-          // value={entry.location}
         />
         <label htmlFor="date" className="text-indigo-600">
           Date

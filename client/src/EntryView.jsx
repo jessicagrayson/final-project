@@ -39,6 +39,7 @@ export default function EntryView() {
     setIsClicked(!isClicked);
     const updateEntry = entry;
     console.log('UPDATE:', updateEntry);
+    setEntry(updateEntry);
   }
 
   return (
@@ -51,7 +52,7 @@ export default function EntryView() {
       />
       <LinkComponent
         onClick={() => setIsClicked(!isClicked)}
-        to="/create-entry"
+        to="/update/:entryId"
         entry={entry}
         placeholder="Edit Entry"
         className="text-indigo-500"
