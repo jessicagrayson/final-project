@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function LinkComponent({ to, className, placeholder, entry }) {
+export default function LinkComponent({
+  to,
+  className,
+  placeholder,
+  entry,
+  state,
+}) {
   return (
     <div>
-      <Link to={to} className={className} entry={entry}>
+      <Link to={to} state={state} className={className} entry={entry}>
         {placeholder}
       </Link>
     </div>

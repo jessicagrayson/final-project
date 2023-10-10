@@ -25,7 +25,7 @@ export default function EntryView() {
 
         const entryData = await res.json();
         setEntry(entryData);
-        console.log('entryData:', entryData);
+        // console.log('entryData:', entryData);
       } catch (error) {
         console.error(error);
       }
@@ -41,7 +41,7 @@ export default function EntryView() {
   if (!entry) {
     return <div>Loading...</div>;
   }
-  console.log('entry:', entry);
+  console.log('entry view:', entry);
 
   return (
     <div>
@@ -52,7 +52,8 @@ export default function EntryView() {
         className="text-indigo-500"
       />
       <LinkComponent
-        to={{ pathname: '/update-entry', state: { entry } }}
+        to="/update-entry"
+        state={entry}
         placeholder="Edit Entry"
         className="text-indigo-500"
       />

@@ -7,7 +7,11 @@ import LinkComponent from './LinkComponent';
 
 export default function EntryForm() {
   const loc = useLocation();
-  const entry = loc.state?.entry;
+  console.log('loc', loc);
+  console.log('state:', loc.state);
+  const entry = loc.state;
+  console.log('loc entry:', entry);
+
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
   const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
@@ -60,7 +64,8 @@ export default function EntryForm() {
       alert(`Error creating entry:, ${error}`);
     }
   };
-  console.log('entry test:', entry);
+  console.log('loc:', loc);
+  console.log('loc.state:', loc.state);
 
   return (
     <div>
@@ -76,6 +81,7 @@ export default function EntryForm() {
         </label>
         <Input
           onChange={handleLocationChange}
+          value={location}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <label htmlFor="date" className="text-indigo-600">
@@ -83,6 +89,7 @@ export default function EntryForm() {
         </label>
         <Input
           onChange={handleTravelDateChange}
+          value={travelDate}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <label htmlFor="url" className="text-indigo-600">
@@ -90,6 +97,7 @@ export default function EntryForm() {
         </label>
         <Input
           onChange={handleImageUrlChange}
+          value={imageUrl}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <label htmlFor="blurb" className="text-indigo-600">
@@ -97,6 +105,7 @@ export default function EntryForm() {
         </label>
         <Input
           onChange={handleBlurbChange}
+          value={blurb}
           className="h-40 mt-5 ml-10 border-2 border-indigo-400 bg-zinc-200 w-80"
         />
         <ImageField src={imageUrl} />
