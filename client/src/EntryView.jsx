@@ -41,6 +41,7 @@ export default function EntryView() {
         placeholder="Back"
         className="text-indigo-500"
       />
+      <LinkComponent placeholder="Edit Entry" className="text-indigo-500" />
     </div>
   );
 }
