@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/" element={<SignIn />} />
         <Route path="/list" element={<EntriesList />} />
         <Route path="create-entry" element={<EntryForm />} />
-        <Route path="/update-entry" element={<EntryForm />} />
+        <Route path="/update-entry/:entryId" element={<EntryForm />} />
         <Route path="/entries/:entryId" element={<EntryView />} />
       </Routes>
     </div>

@@ -7,19 +7,16 @@ import LinkComponent from './LinkComponent';
 
 export default function EntryForm() {
   const loc = useLocation();
-  console.log('loc', loc);
-  console.log('state:', loc.state);
   const entry = loc.state;
-  console.log('loc entry:', entry);
-
+  const isUpdating = !!entry;
+  const entryId = entry.entryId;
+  console.log('entryId?', entryId);
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
   const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
   const [imageUrl, setImageUrl] = useState(entry?.imageUrl ?? '');
 
-  console.log('loc:', loc);
-  console.log('loc.state:', loc.state);
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
@@ -48,8 +45,11 @@ export default function EntryForm() {
     };
 
     try {
-      const res = await fetch('/api/entryform', {
-        method: 'POST',
+      const method = isUpdating ? 'PUT' : 'POST';
+      const url = isUpdating ? `/api/update/${entryId}` : '/api/entryform';
+
+      const res = await fetch(url, {
+        method: method,
         headers: {
           'Content-type': 'application/json',
         },
@@ -59,13 +59,12 @@ export default function EntryForm() {
         throw new Error(`Fetch error ${res.status}`);
       }
       const entry = await res.json();
+      // Replace w/ pop up modal - conditional depending on isUpdating
       console.log('Uploaded:', entry);
     } catch (error) {
       alert(`Error creating entry:, ${error}`);
     }
   };
-  console.log('loc:', loc);
-  console.log('loc.state:', loc.state);
 
   return (
     <div>
