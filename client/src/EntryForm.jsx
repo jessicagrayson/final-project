@@ -8,7 +8,9 @@ import LinkComponent from './LinkComponent';
 export default function EntryForm() {
   const loc = useLocation();
   const entry = loc.state;
+
   const isUpdating = !!entry;
+  // Bug here for create new entry
   const entryId = entry.entryId;
   console.log('entryId?', entryId);
   // Entry state variables

@@ -3,7 +3,7 @@ import Input from './Input';
 import CustomButton from './CustomButton';
 import LinkComponent from './LinkComponent';
 
-export default function SignIn() {
+export default function SignUp() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -74,7 +74,7 @@ export default function SignIn() {
           autoComplete="current-password"
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
-        <CustomButton type="submit" label="Sign In" />
+        <CustomButton type="submit" label="Sign Up" />
       </form>
       <LinkComponent
         to="/list"

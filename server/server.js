@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import argon2 from 'argon2';
+import jwt from 'jsonwebtoken';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
@@ -51,6 +52,33 @@ app.post('/api/register', async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Failed to register' });
+  }
+});
+
+// Sign in
+app.post('/api/sign-in', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new ClientError(401, 'Invalid login credentials');
+    }
+    const sql = `
+    SELECT "userId", "hashedPassword" from "users" where "username" = $1
+    `;
+    const result = await db.query(sql, [username]);
+    if (result.rows.length === 0) {
+      throw new ClientError(401, 'Invalid login credentials');
+    }
+    const [{ userId, hashedPassword }] = result.rows;
+    if (!(await argon2.verify(hashedPassword, password))) {
+      throw new ClientError(401, 'Invalid login credentials');
+    }
+    const payload = { username, userId };
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    // res.json({ token, payload });
+    res.status(200).json({ message: 'Sign in successful', token, payload });
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -159,6 +187,7 @@ app.put('/api/update/:entryId', async (req, res) => {
   }
 });
 
+// DELETES an entry
 app.delete('/api/delete/:entryId', async (req, res) => {
   try {
     const entryId = Number(req.params.entryId);
