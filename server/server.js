@@ -75,8 +75,10 @@ app.post('/api/sign-in', async (req, res) => {
     }
     const payload = { username, userId };
     const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    sessionStorage.setItem('token:', token);
     res.status(200).json({ message: 'Sign in successful', token, payload });
   } catch (error) {
+    alert(`Error signing in: ${error}`);
     console.error(error);
   }
 });
