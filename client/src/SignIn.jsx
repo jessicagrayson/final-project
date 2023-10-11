@@ -48,6 +48,7 @@ export default function SignIn() {
 
   return (
     <div>
+      <h3>Sign in to your next adventure!</h3>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <label htmlFor="username" className="text-indigo-600">
           Username:
@@ -80,6 +81,11 @@ export default function SignIn() {
         to="/list"
         className="text-indigo-600"
         placeholder="See all entries"
+      />
+      <LinkComponent
+        to="/register"
+        className="text-indigo-600"
+        placeholder="New here?"
       />
     </div>
   );

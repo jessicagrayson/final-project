@@ -10,9 +10,10 @@ export default function EntryForm() {
   const entry = loc.state;
 
   const isUpdating = !!entry;
-  // Bug here for create new entry
-  const entryId = entry.entryId;
+  // const entryId = entry.entryId;
+  const entryId = entry ? entry.entryId : null;
   console.log('entryId?', entryId);
+
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
   const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');

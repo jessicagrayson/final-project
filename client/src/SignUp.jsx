@@ -48,6 +48,7 @@ export default function SignUp() {
 
   return (
     <div>
+      <h3>Welcome! Create an account</h3>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <label htmlFor="username" className="text-indigo-600">
           Username:
