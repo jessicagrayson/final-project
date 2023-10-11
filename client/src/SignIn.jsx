@@ -29,10 +29,10 @@ export default function SignIn() {
         throw new Error(`fetch Error ${res.status}`);
       }
       // console.log('res text:', await res.text());
-      const { username, token } = await res.json();
+      const { user, token } = await res.json();
       sessionStorage.setItem('token:', token);
-      console.log('Signed In', username, ': received token:', token);
-      console.log('username:', username);
+      console.log('Signed In', user, ': received token:', token);
+      console.log('username:', user);
     } catch (error) {
       alert(`Sign in error ${error}`);
       console.error(error);
