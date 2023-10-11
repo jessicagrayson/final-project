@@ -4,50 +4,46 @@ import CustomButton from './CustomButton';
 import LinkComponent from './LinkComponent';
 
 export default function SignIn() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  // console.log(formData);
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Creates new user object from values
-    const newUser = {
-      username: username,
-      password: password,
-    };
-
+  async function handleSubmit(event) {
+    event.preventDefault();
     try {
-      const res = await fetch('/api/register', {
+      const req = {
         method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(newUser),
-      });
-
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(formData),
+      };
+      console.log(formData);
+      const res = await fetch('/api/sign-in', req);
       if (!res.ok) {
-        throw new Error(`Fetch error ${res.status}`);
+        throw new Error(`fetch Error ${res.status}`);
       }
-      const user = await res.json();
-      console.log('Registered:', user);
+      // console.log('res text:', await res.text());
+      const { username, token } = await res.json();
+      console.log('Signed In', username, ': received token:', token);
+      console.log('username:', username);
     } catch (error) {
-      alert(`Error registering user: ${error}`);
+      console.error(error);
     }
-    // Logs new values
-    console.log('username:', username);
-    console.log('password', password);
-    console.log('newUser', newUser);
+  }
+
+  const handleUsernameChange = (event) => {
+    setFormData({ ...formData, username: event.target.value });
+  };
+
+  const handlePasswordChange = (event) => {
+    setFormData({ ...formData, password: event.target.value });
   };
 
   return (
     <div>
+      <h3>Sign in to your next adventure!</h3>
       <form onSubmit={handleSubmit} className="flex flex-col">
         <label htmlFor="username" className="text-indigo-600">
           Username:
@@ -55,10 +51,8 @@ export default function SignIn() {
         <Input
           id="username"
           name="username"
-          onChange={handleUsernameChange}
           type={'text'}
-          placeholder={''}
-          autoComplete="username"
+          onChange={handleUsernameChange}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <label htmlFor="password" className="text-indigo-600">
@@ -68,18 +62,21 @@ export default function SignIn() {
         <Input
           id="password"
           name="password"
-          onChange={handlePasswordChange}
           type={'password'}
-          placeholder={''}
-          autoComplete="current-password"
+          onChange={handlePasswordChange}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
-        <CustomButton type="submit" label="Sign Up" />
+        <CustomButton type="submit" label="Sign In" />
       </form>
       <LinkComponent
         to="/list"
         className="text-indigo-600"
         placeholder="See all entries"
+      />
+      <LinkComponent
+        to="/register"
+        className="text-indigo-600"
+        placeholder="New here?"
       />
     </div>
   );

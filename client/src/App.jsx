@@ -1,6 +1,7 @@
 // import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SignIn from './SignIn.jsx';
+import SignUp from './SignUp.jsx';
 import EntryForm from './EntryForm.jsx';
 // import Entry from './Entry.jsx';
 import EntryView from './EntryView.jsx';
@@ -14,6 +15,7 @@ export default function App() {
       <GophrLogo />
       <Routes>
         <Route path="/" element={<SignIn />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/list" element={<EntriesList />} />
         <Route path="create-entry" element={<EntryForm />} />
         <Route path="/update-entry/:entryId" element={<EntryForm />} />
