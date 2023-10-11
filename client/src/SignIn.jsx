@@ -30,7 +30,7 @@ export default function SignIn() {
       }
       // console.log('res text:', await res.text());
       const { user, token } = await res.json();
-      sessionStorage.setItem('token:', token);
+      sessionStorage.setItem('token', token);
       console.log('Signed In', user, ': received token:', token);
       console.log('username:', user);
     } catch (error) {

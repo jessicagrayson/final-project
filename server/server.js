@@ -31,7 +31,7 @@ app.use(express.json());
 // });
 
 // Account registration function
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', async (req, res, next) => {
   try {
     const { username, password } = req.body;
     // Validates registration data - throws error if invalid
@@ -50,8 +50,7 @@ app.post('/api/register', async (req, res) => {
     res.status(201).json(response.rows[0]);
     // Handles error
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Failed to register' });
+    next(error);
   }
 });
 
@@ -109,13 +108,12 @@ app.post('/api/entryform', authMiddleware, async (req, res, next) => {
     // Responds with new entry data
     res.status(201).json(response.rows[0]);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: `Failed to create entry` });
+    next(error);
   }
 });
 
 // GETS entry values by id
-app.get('/api/entries/:entryId', async (req, res) => {
+app.get('/api/entries/:entryId', async (req, res, next) => {
   try {
     const entryId = Number(req.params.entryId);
     if (!Number.isInteger(entryId) || entryId <= 0) {
@@ -136,33 +134,36 @@ app.get('/api/entries/:entryId', async (req, res) => {
 
     res.status(200).json(entry);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // GETS all entries
-app.get('/api/entries', async (req, res) => {
+app.get('/api/entries', authMiddleware, async (req, res, next) => {
+  console.log('req1:', req);
   try {
+    if (!req.user) {
+      throw new ClientError(401, 'You are not logged in');
+    }
+    console.log('req2:', req);
+
     const sql = `
     SELECT * from "entries"
+    WHERE "userId" = $1
     `;
-
-    const result = await db.query(sql);
+    const result = await db.query(sql, [req.user.userId]);
     const entries = result.rows;
-
     if (!entries) {
       return res.status(404).json({ error: 'No entries found' });
     }
-
     res.status(200).json(entries);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error);
   }
 });
 
 // PUT (updates) an entry by id
-app.put('/api/update/:entryId', async (req, res) => {
+app.put('/api/update/:entryId', async (req, res, next) => {
   try {
     const entryId = Number(req.params.entryId);
     validateEntryId(entryId);
@@ -187,12 +188,12 @@ app.put('/api/update/:entryId', async (req, res) => {
     }
     res.json(entry);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // DELETES an entry
-app.delete('/api/delete/:entryId', async (req, res) => {
+app.delete('/api/delete/:entryId', async (req, res, next) => {
   try {
     const entryId = Number(req.params.entryId);
     validateEntryId(entryId);
@@ -210,8 +211,7 @@ app.delete('/api/delete/:entryId', async (req, res) => {
     validateEntry(entry, entryId);
     res.sendStatus(204);
   } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+    next(error);
     // Confirm message for entryId
   }
 });
