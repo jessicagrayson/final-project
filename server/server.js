@@ -159,6 +159,30 @@ app.put('/api/update/:entryId', async (req, res) => {
   }
 });
 
+app.delete('/api/delete/:entryId', async (req, res) => {
+  try {
+    const entryId = Number(req.params.entryId);
+    validateEntryId(entryId);
+
+    // Create sql object
+    const sql = `
+    DELETE from "entries"
+    WHERE "entryId" = $1
+    RETURNING *
+`;
+    // Set query params
+    const params = [entryId];
+    const result = await db.query(sql, params);
+    const entry = result.rows[0];
+    validateEntry(entry, entryId);
+    res.sendStatus(204);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+    // Confirm message for entryId
+  }
+});
+
 /**
  * Serves React's index.html if no api route matches.
  *
@@ -182,5 +206,11 @@ app.listen(process.env.PORT, () => {
 function validateEntryId(entryId) {
   if (!Number.isInteger(entryId) || entryId <= 0) {
     throw new ClientError(400, 'entryId must be a positive integer');
+  }
+}
+
+function validateEntry(entry, entryId) {
+  if (!entry) {
+    throw new ClientError(404, `Cannot find entry with "entryId" ${entryId}`);
   }
 }
