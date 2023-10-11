@@ -10,7 +10,6 @@ export default function EntryForm() {
   const entry = loc.state;
 
   const isUpdating = !!entry;
-  // const entryId = entry.entryId;
   const entryId = entry ? entry.entryId : null;
   console.log('entryId?', entryId);
 
