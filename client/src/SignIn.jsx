@@ -14,21 +14,27 @@ export default function SignIn() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
+      const formData = new FormData(event.currentTarget);
+      const userData = Object.fromEntries(formData.entries());
+      console.log('formData:', formData);
+      console.log('userData:', userData);
       const req = {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(userData),
       };
-      console.log(formData);
       const res = await fetch('/api/sign-in', req);
+      console.log('res:', res);
       if (!res.ok) {
         throw new Error(`fetch Error ${res.status}`);
       }
       // console.log('res text:', await res.text());
       const { username, token } = await res.json();
+      sessionStorage.setItem('token:', token);
       console.log('Signed In', username, ': received token:', token);
       console.log('username:', username);
     } catch (error) {
+      alert(`Sign in error ${error}`);
       console.error(error);
     }
   }
