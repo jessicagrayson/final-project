@@ -1,27 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import LinkComponent from './LinkComponent';
 
 export default function SignIn() {
-  async function handleSubmit() {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+
+  // console.log(formData);
+
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
       const req = {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(),
+        body: JSON.stringify(formData),
       };
+      console.log(formData);
       const res = await fetch('/api/sign-in', req);
       if (!res.ok) {
         throw new Error(`fetch Error ${res.status}`);
       }
-      const { user, token } = await res.json();
-      console.log('Signed In', user, ': received token:', token);
+      // console.log('res text:', await res.text());
+      const { username, token } = await res.json();
+      console.log('Signed In', username, ': received token:', token);
+      console.log('username:', username);
     } catch (error) {
       console.error(error);
     }
   }
+
+  const handleUsernameChange = (event) => {
+    setFormData({ ...formData, username: event.target.value });
+  };
+
+  const handlePasswordChange = (event) => {
+    setFormData({ ...formData, password: event.target.value });
+  };
 
   return (
     <div>
@@ -34,6 +52,7 @@ export default function SignIn() {
           id="username"
           name="username"
           type={'text'}
+          onChange={handleUsernameChange}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <label htmlFor="password" className="text-indigo-600">
@@ -44,6 +63,7 @@ export default function SignIn() {
           id="password"
           name="password"
           type={'password'}
+          onChange={handlePasswordChange}
           className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
         />
         <CustomButton type="submit" label="Sign In" />
