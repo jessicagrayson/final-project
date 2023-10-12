@@ -51,10 +51,11 @@ export default function EntriesList() {
         placeholder="Sign Out"
         className="text-rose-400"
       />
-
-      {entries.map((entry) => (
-        <Entry key={entry.entryId} entry={entry} />
-      ))}
+      <div className="flex flex-col bg-lime-400">
+        {entries.map((entry) => (
+          <Entry key={entry.entryId} entry={entry} />
+        ))}
+      </div>
     </div>
   );
 }

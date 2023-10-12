@@ -3,7 +3,6 @@ import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import Input from './Input';
 import BlurbComponent from './BlurbComponent';
-// import EntryView from './EntryView';
 
 export default function Entry({ entry }) {
   const [expanded, setExpanded] = useState(false);
@@ -11,6 +10,16 @@ export default function Entry({ entry }) {
   const handleExpandClick = useCallback(() => {
     setExpanded(!expanded);
   }, [expanded]);
+
+  function formatISODate(isoDate) {
+    const date = new Date(isoDate);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
 
   return (
     <div>
@@ -24,7 +33,7 @@ export default function Entry({ entry }) {
         <Input
           className="text-indigo-400"
           placeholder="Travel Date"
-          value={entry.travelDate}
+          value={formatISODate(entry.travelDate)}
           onChange={(e) => entry.onChange('Travel Date', e.target.value)}
         />
         <ImageField
@@ -46,12 +55,6 @@ export default function Entry({ entry }) {
           className="text-indigo-500"
         />
       </form>
-      {/* {expanded && (
-        <EntryView
-          entryId={entry.entryId}
-          onChange={() => setExpanded(false)}
-        />
-      )} */}
     </div>
   );
 }
