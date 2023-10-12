@@ -3,7 +3,7 @@ import express from 'express';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import pg from 'pg';
-import { ClientError, errorMiddleware } from './lib/index.js';
+import { ClientError, errorMiddleware, authMiddleware } from './lib/index.js';
 
 const connectionString =
   process.env.DATABASE_URL ||
@@ -31,7 +31,7 @@ app.use(express.json());
 // });
 
 // Account registration function
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', async (req, res, next) => {
   try {
     const { username, password } = req.body;
     // Validates registration data - throws error if invalid
@@ -50,13 +50,12 @@ app.post('/api/register', async (req, res) => {
     res.status(201).json(response.rows[0]);
     // Handles error
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Failed to register' });
+    next(error);
   }
 });
 
 // Sign in
-app.post('/api/sign-in', async (req, res) => {
+app.post('/api/sign-in', async (req, res, next) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -65,27 +64,34 @@ app.post('/api/sign-in', async (req, res) => {
     const sql = `
     SELECT "userId", "hashedPassword" from "users" where "username" = $1
     `;
-    const result = await db.query(sql, [username]);
-    if (result.rows.length === 0) {
+    const params = [username];
+    const result = await db.query(sql, params);
+    const [user] = result.rows;
+    if (!user) {
       throw new ClientError(401, 'Invalid login credentials');
     }
-    const [{ userId, hashedPassword }] = result.rows;
+    const { userId, hashedPassword } = user;
+    console.log('user:', user);
     if (!(await argon2.verify(hashedPassword, password))) {
       throw new ClientError(401, 'Invalid login credentials');
     }
-    const payload = { username, userId };
+    const payload = { userId, username };
+    console.log('payload:', payload);
     const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-    sessionStorage.setItem('token:', token);
-    res.status(200).json({ message: 'Sign in successful', token, payload });
+    res.json({ token, user: payload });
+    console.log('res:', res);
   } catch (error) {
-    alert(`Error signing in: ${error}`);
-    console.error(error);
+    next(error);
   }
 });
 
 // POSTS new entry
-app.post('/api/entryform', async (req, res) => {
+app.post('/api/entryform', authMiddleware, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new ClientError(401, 'User is not logged in');
+    }
+
     const { location, travelDate, blurb, imageUrl } = req.body;
     // Validates entry form data - throws error if invalid
     if (!location || !travelDate || !blurb || !imageUrl) {
@@ -93,26 +99,21 @@ app.post('/api/entryform', async (req, res) => {
     }
     // Creates sql for new entry
     const insertEntrySql = `
-    INSERT INTO "entries" ("location", "travelDate", "blurb", "imageUrl")
-    VALUES ($1, $2, $3, $4)
-    RETURNING "blurb"
+    INSERT INTO "entries" ("userId", "location", "travelDate", "blurb", "imageUrl")
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *
     `;
-    const response = await db.query(insertEntrySql, [
-      location,
-      travelDate,
-      blurb,
-      imageUrl,
-    ]);
+    const params = [req.user.userId, location, travelDate, blurb, imageUrl];
+    const response = await db.query(insertEntrySql, params);
     // Responds with new entry data
     res.status(201).json(response.rows[0]);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: `Failed to create entry` });
+    next(error);
   }
 });
 
 // GETS entry values by id
-app.get('/api/entries/:entryId', async (req, res) => {
+app.get('/api/entries/:entryId', async (req, res, next) => {
   try {
     const entryId = Number(req.params.entryId);
     if (!Number.isInteger(entryId) || entryId <= 0) {
@@ -133,33 +134,36 @@ app.get('/api/entries/:entryId', async (req, res) => {
 
     res.status(200).json(entry);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // GETS all entries
-app.get('/api/entries', async (req, res) => {
+app.get('/api/entries', authMiddleware, async (req, res, next) => {
+  console.log('req1:', req);
   try {
+    if (!req.user) {
+      throw new ClientError(401, 'You are not logged in');
+    }
+    console.log('req2:', req);
+
     const sql = `
     SELECT * from "entries"
+    WHERE "userId" = $1
     `;
-
-    const result = await db.query(sql);
+    const result = await db.query(sql, [req.user.userId]);
     const entries = result.rows;
-
     if (!entries) {
       return res.status(404).json({ error: 'No entries found' });
     }
-
     res.status(200).json(entries);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error);
   }
 });
 
 // PUT (updates) an entry by id
-app.put('/api/update/:entryId', async (req, res) => {
+app.put('/api/update/:entryId', async (req, res, next) => {
   try {
     const entryId = Number(req.params.entryId);
     validateEntryId(entryId);
@@ -184,12 +188,12 @@ app.put('/api/update/:entryId', async (req, res) => {
     }
     res.json(entry);
   } catch (error) {
-    console.error(error);
+    next(error);
   }
 });
 
 // DELETES an entry
-app.delete('/api/delete/:entryId', async (req, res) => {
+app.delete('/api/delete/:entryId', async (req, res, next) => {
   try {
     const entryId = Number(req.params.entryId);
     validateEntryId(entryId);
@@ -207,8 +211,7 @@ app.delete('/api/delete/:entryId', async (req, res) => {
     validateEntry(entry, entryId);
     res.sendStatus(204);
   } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+    next(error);
     // Confirm message for entryId
   }
 });

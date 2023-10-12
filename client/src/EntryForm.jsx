@@ -11,7 +11,6 @@ export default function EntryForm() {
 
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
-  console.log('entryId?', entryId);
 
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
@@ -38,6 +37,7 @@ export default function EntryForm() {
   const handleSubmit = async (e) => {
     // Remove this preventDefault when done testing
     e.preventDefault();
+
     // Creates new entry object from values
     const newEntry = {
       location: location,
@@ -49,18 +49,22 @@ export default function EntryForm() {
     try {
       const method = isUpdating ? 'PUT' : 'POST';
       const url = isUpdating ? `/api/update/${entryId}` : '/api/entryform';
-
-      const res = await fetch(url, {
+      const req = {
         method: method,
         headers: {
           'Content-type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         body: JSON.stringify(newEntry),
-      });
+      };
+
+      const res = await fetch(url, req);
+
       if (!res.ok) {
         throw new Error(`Fetch error ${res.status}`);
       }
       const entry = await res.json();
+      console.log('res:', res);
       // Replace w/ pop up modal - conditional depending on isUpdating
       console.log('Uploaded:', entry);
     } catch (error) {

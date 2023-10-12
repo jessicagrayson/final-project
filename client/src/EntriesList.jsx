@@ -4,15 +4,24 @@ import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
   const [entries, setEntries] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('/api/entries');
+        const req = {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+          },
+        };
+        console.log('storage:', sessionStorage);
+        console.log('req:', req);
+
+        const res = await fetch('/api/entries', req);
         if (!res.ok) {
           throw new Error('Failed to fetch data');
         }
         const data = await res.json();
+        console.log('data:', data);
         setEntries(data);
       } catch (error) {
         console.error(error);
