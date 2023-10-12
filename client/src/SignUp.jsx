@@ -65,7 +65,7 @@ export default function SignUp() {
                   name="username"
                   type={'text'}
                   onChange={handleUsernameChange}
-                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                  className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                   autoComplete="off"
                 />
               </div>
@@ -80,11 +80,13 @@ export default function SignUp() {
                   name="password"
                   type={'password'}
                   onChange={handlePasswordChange}
-                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                  className="border-2 border-indigo-400 rounded-sm bg-zinc-100 text-zinc-600 focus:bg-white w-80 h-9"
                 />
               </div>
               <CustomButton
-                className={'h-9 text-white bg-indigo-500 rounded-sm w-65'}
+                className={
+                  'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
+                }
                 type="submit"
                 label="Welcome!"
               />
@@ -94,7 +96,7 @@ export default function SignUp() {
         <div className="flex justify-end w-full ">
           <LinkComponent
             to="/"
-            className="text-sm text-indigo-600"
+            className="text-sm text-indigo-600 hover:underline"
             placeholder="Sign In"
           />
         </div>

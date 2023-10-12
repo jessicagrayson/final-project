@@ -65,7 +65,7 @@ export default function SignIn() {
                   name="username"
                   type={'text'}
                   onChange={handleUsernameChange}
-                  className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-200 w-80 h-9"
+                  className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                   autoComplete="off"
                 />
               </div>
@@ -85,7 +85,7 @@ export default function SignIn() {
                   name="password"
                   type={'password'}
                   onChange={handlePasswordChange}
-                  className="border-2 border-indigo-400 rounded-sm text-zinc-500 focus:bg-white bg-zinc-200 w-80 h-9"
+                  className="border-2 border-indigo-400 rounded-sm text-zinc-500 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
               </div>
               <CustomButton
