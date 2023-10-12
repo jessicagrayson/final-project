@@ -101,9 +101,9 @@ app.post('/api/entryform', authMiddleware, async (req, res, next) => {
     const insertEntrySql = `
     INSERT INTO "entries" ("location", "travelDate", "blurb", "imageUrl")
     VALUES ($1, $2, $3, $4)
-    RETURNING "blurb"
+    RETURNING *
     `;
-    const params = [req.user.userId, location, travelDate, blurb, imageUrl];
+    const params = [location, travelDate, blurb, imageUrl];
     const response = await db.query(insertEntrySql, params);
     // Responds with new entry data
     res.status(201).json(response.rows[0]);
