@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import Input from './Input';
-import BlurbComponent from './BlurbComponent';
+// import BlurbComponent from './BlurbComponent';
 
 export default function Entry({ entry }) {
   const [expanded, setExpanded] = useState(false);
@@ -22,15 +22,16 @@ export default function Entry({ entry }) {
   }
 
   return (
-    <div className="flex bg-green-500">
+    <div className="flex">
       <form>
         <ImageField
           src={entry.imageUrl}
           placeholder="Image URL"
           value={entry.imageUrl}
+          width="200"
           onChange={(e) => entry.onChange('Image Url', e.target.value)}
         />
-        <div className="bg-red-300">
+        <div>
           <Input
             className="text-indigo-400"
             placeholder="Location"
@@ -44,12 +45,12 @@ export default function Entry({ entry }) {
             onChange={(e) => entry.onChange('Travel Date', e.target.value)}
           />
         </div>
-        <BlurbComponent
+        {/* <BlurbComponent
           className="text-black"
           placeholder="Blurb"
           value={entry.blurb}
           onChange={(e) => entry.onChange('Blurb', e.target.value)}
-        />
+        /> */}
         <LinkComponent
           to={`/entries/${entry.entryId}`}
           onClick={handleExpandClick}

@@ -1,9 +1,14 @@
 import React from 'react';
 
-export default function ImageField({ src, alt, className }) {
+export default function ImageField({ src, alt, className, width, height }) {
   return (
     <div>
-      <img src={src} alt={alt} className={className}></img>
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}></img>
     </div>
   );
 }

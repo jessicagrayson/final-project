@@ -65,7 +65,7 @@ export default function SignIn() {
                   name="username"
                   type={'text'}
                   onChange={handleUsernameChange}
-                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                  className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-200 w-80 h-9"
                   autoComplete="off"
                 />
               </div>
@@ -77,7 +77,7 @@ export default function SignIn() {
                   <LinkComponent
                     to="/forgotten-password"
                     placeholder={'Forgot password?'}
-                    className={'text-xs text-indigo-600'}
+                    className="text-xs text-indigo-600 hover:underline"
                   />
                 </div>
                 <Input
@@ -85,21 +85,23 @@ export default function SignIn() {
                   name="password"
                   type={'password'}
                   onChange={handlePasswordChange}
-                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                  className="border-2 border-indigo-400 rounded-sm text-zinc-500 focus:bg-white bg-zinc-200 w-80 h-9"
                 />
               </div>
               <CustomButton
-                className={'h-9 text-white bg-indigo-500 rounded-sm w-65'}
+                className={
+                  'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
+                }
                 type="submit"
                 label="Sign In"
               />
             </div>
           </form>
         </div>
-        <div className="flex justify-end w-full ">
+        <div className="flex justify-end w-full">
           <LinkComponent
             to="/register"
-            className="text-sm text-indigo-600"
+            className="text-sm text-indigo-600 hover:underline"
             placeholder="New here?"
           />
         </div>
