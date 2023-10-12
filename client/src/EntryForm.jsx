@@ -132,7 +132,10 @@ export default function EntryForm() {
                   className="text-indigo-500"
                 />
               </div>
-              <ImageField src={imageUrl} />
+              <ImageField
+                src={imageUrl}
+                className="border-2 border-lime-600 w-50 h-50"
+              />
             </div>
           </form>
         </div>
