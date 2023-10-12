@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Entry from './Entry';
 import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
+  const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -13,8 +16,6 @@ export default function EntriesList() {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         };
-        console.log('storage:', sessionStorage);
-        console.log('req:', req);
 
         const res = await fetch('/api/entries', req);
         if (!res.ok) {
@@ -31,18 +32,32 @@ export default function EntriesList() {
     fetchData();
   }, []);
 
+  function handleSignOut() {
+    sessionStorage.removeItem('token');
+    navigate('/');
+  }
+
   return (
     <div>
-      <LinkComponent
-        to="/create-entry"
-        placeholder="Create New Entry"
-        className="text-indigo-500"
-      />
-      <LinkComponent to="/" placeholder="Back" className="text-indigo-500" />
+      <div className="flex justify-between ">
+        <LinkComponent
+          to="/create-entry"
+          placeholder="Create New Entry"
+          className="text-indigo-500"
+        />
 
-      {entries.map((entry) => (
-        <Entry key={entry.entryId} entry={entry} />
-      ))}
+        <LinkComponent
+          onClick={handleSignOut}
+          to="/"
+          placeholder="Sign Out"
+          className="text-rose-400"
+        />
+      </div>
+      <div className="flex flex-col items-center justify-center">
+        {entries.map((entry) => (
+          <Entry key={entry.entryId} entry={entry} />
+        ))}
+      </div>
     </div>
   );
 }

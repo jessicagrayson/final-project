@@ -29,7 +29,6 @@ export default function EntryView() {
   if (!entry) {
     return <div>Loading...</div>;
   }
-  console.log('entry view:', entry);
 
   return (
     <div>

@@ -1,13 +1,11 @@
-// import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SignIn from './SignIn.jsx';
 import SignUp from './SignUp.jsx';
 import EntryForm from './EntryForm.jsx';
-// import Entry from './Entry.jsx';
 import EntryView from './EntryView.jsx';
 import EntriesList from './EntriesList.jsx';
+import ForgottenPassword from './ForgottenPassword.jsx';
 import GophrLogo from './GophrLogo.jsx';
-import './App.css';
 
 export default function App() {
   return (
@@ -20,6 +18,7 @@ export default function App() {
         <Route path="create-entry" element={<EntryForm />} />
         <Route path="/update-entry/:entryId" element={<EntryForm />} />
         <Route path="/entries/:entryId" element={<EntryView />} />
+        <Route path="/forgotten-password" element={<ForgottenPassword />} />
       </Routes>
     </div>
   );
