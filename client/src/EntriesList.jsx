@@ -6,6 +6,7 @@ import LinkComponent from './LinkComponent';
 export default function EntriesList() {
   const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,8 +16,6 @@ export default function EntriesList() {
             Authorization: `Bearer ${sessionStorage.getItem('token')}`,
           },
         };
-        // console.log('storage:', sessionStorage);
-        // console.log('req:', req);
 
         const res = await fetch('/api/entries', req);
         if (!res.ok) {
@@ -54,7 +53,7 @@ export default function EntriesList() {
           className="text-rose-400"
         />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center justify-center">
         {entries.map((entry) => (
           <Entry key={entry.entryId} entry={entry} />
         ))}

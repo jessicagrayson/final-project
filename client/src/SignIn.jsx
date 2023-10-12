@@ -66,6 +66,7 @@ export default function SignIn() {
                   type={'text'}
                   onChange={handleUsernameChange}
                   className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                  autoComplete="off"
                 />
               </div>
               <div className="flex flex-col">

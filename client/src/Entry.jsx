@@ -22,26 +22,28 @@ export default function Entry({ entry }) {
   }
 
   return (
-    <div>
-      <form className="flex flex-col">
+    <div className="flex bg-green-500">
+      <form>
         <ImageField
           src={entry.imageUrl}
           placeholder="Image URL"
           value={entry.imageUrl}
           onChange={(e) => entry.onChange('Image Url', e.target.value)}
         />
-        <Input
-          className="text-indigo-400"
-          placeholder="Location"
-          value={entry.location}
-          onChange={(e) => entry.onChange('location', e.target.value)}
-        />
-        <Input
-          className="text-indigo-400"
-          placeholder="Travel Date"
-          value={formatISODate(entry.travelDate)}
-          onChange={(e) => entry.onChange('Travel Date', e.target.value)}
-        />
+        <div className="bg-red-300">
+          <Input
+            className="text-indigo-400"
+            placeholder="Location"
+            value={entry.location}
+            onChange={(e) => entry.onChange('location', e.target.value)}
+          />
+          <Input
+            className="text-indigo-400"
+            placeholder="Travel Date"
+            value={formatISODate(entry.travelDate)}
+            onChange={(e) => entry.onChange('Travel Date', e.target.value)}
+          />
+        </div>
         <BlurbComponent
           className="text-black"
           placeholder="Blurb"
