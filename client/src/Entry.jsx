@@ -24,6 +24,12 @@ export default function Entry({ entry }) {
   return (
     <div>
       <form className="flex flex-col">
+        <ImageField
+          src={entry.imageUrl}
+          placeholder="Image URL"
+          value={entry.imageUrl}
+          onChange={(e) => entry.onChange('Image Url', e.target.value)}
+        />
         <Input
           className="text-indigo-400"
           placeholder="Location"
@@ -35,12 +41,6 @@ export default function Entry({ entry }) {
           placeholder="Travel Date"
           value={formatISODate(entry.travelDate)}
           onChange={(e) => entry.onChange('Travel Date', e.target.value)}
-        />
-        <ImageField
-          src={entry.imageUrl}
-          placeholder="Image URL"
-          value={entry.imageUrl}
-          onChange={(e) => entry.onChange('Image Url', e.target.value)}
         />
         <BlurbComponent
           className="text-black"

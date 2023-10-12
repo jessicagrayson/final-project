@@ -74,6 +74,7 @@ export default function SignIn() {
                     Password:
                   </label>
                   <LinkComponent
+                    to="/forgotten-password"
                     placeholder={'Forgot password?'}
                     className={'text-xs text-indigo-600'}
                   />

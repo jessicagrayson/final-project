@@ -73,49 +73,68 @@ export default function EntryForm() {
   };
 
   return (
-    <div>
-      <LinkComponent
-        to="/list"
-        placeholder="Back"
-        className="text-indigo-500"
-      />
-
-      <form onSubmit={handleSubmit} className="flex flex-col ml-4">
-        <label htmlFor="location" className="text-indigo-600">
-          Location
-        </label>
-        <Input
-          onChange={handleLocationChange}
-          value={location}
-          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+    <div className="flex items-center justify-center h-screen">
+      <div>
+        <LinkComponent
+          to="/list"
+          placeholder="Back"
+          className="text-indigo-500"
         />
-        <label htmlFor="date" className="text-indigo-600">
-          Date
-        </label>
-        <Input
-          onChange={handleTravelDateChange}
-          value={travelDate}
-          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
-        />
-        <label htmlFor="url" className="text-indigo-600">
-          Image Url
-        </label>
-        <Input
-          onChange={handleImageUrlChange}
-          value={imageUrl}
-          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
-        />
-        <label htmlFor="blurb" className="text-indigo-600">
-          Blurb
-        </label>
-        <Input
-          onChange={handleBlurbChange}
-          value={blurb}
-          className="h-40 mt-5 ml-10 border-2 border-indigo-400 bg-zinc-200 w-80"
-        />
-        <ImageField src={imageUrl} />
-        <CustomButton label="Submit" />
-      </form>
+      </div>
+      <div className="flex flex-col items-center justify-center gap-y-12">
+        <h3 className="text-lg font-medium">Create an entry </h3>
+        <div className="flex items-end justify-center">
+          <form onSubmit={handleSubmit} className="flex flex-col ml-4">
+            <div className="flex flex-col gap-y-12">
+              <div className="flex flex-col">
+                <label htmlFor="location" className="text-indigo-600">
+                  Location
+                </label>
+                <Input
+                  onChange={handleLocationChange}
+                  value={location}
+                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="date" className="text-indigo-600">
+                  Date
+                </label>
+                <Input
+                  onChange={handleTravelDateChange}
+                  value={travelDate}
+                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="url" className="text-indigo-600">
+                  Image Url
+                </label>
+                <Input
+                  onChange={handleImageUrlChange}
+                  value={imageUrl}
+                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                />
+              </div>
+              <div className="flex flex-col">
+                <label htmlFor="blurb" className="text-indigo-600">
+                  Blurb
+                </label>
+                <Input
+                  onChange={handleBlurbChange}
+                  value={blurb}
+                  className="h-40 border-2 border-indigo-400 bg-zinc-200 w-80"
+                />
+              </div>
+              <ImageField src={imageUrl} />
+              <CustomButton
+                className={'h-9 text-white bg-indigo-500 rounded-sm w-65'}
+                label="Submit"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

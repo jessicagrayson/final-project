@@ -40,18 +40,21 @@ export default function EntriesList() {
 
   return (
     <div>
-      <LinkComponent
-        to="/create-entry"
-        placeholder="Create New Entry"
-        className="text-indigo-500"
-      />
-      <LinkComponent
-        onClick={handleSignOut}
-        to="/"
-        placeholder="Sign Out"
-        className="text-rose-400"
-      />
-      <div className="flex flex-col bg-lime-400">
+      <div className="flex justify-between ">
+        <LinkComponent
+          to="/create-entry"
+          placeholder="Create New Entry"
+          className="text-indigo-500"
+        />
+
+        <LinkComponent
+          onClick={handleSignOut}
+          to="/"
+          placeholder="Sign Out"
+          className="text-rose-400"
+        />
+      </div>
+      <div className="flex flex-col">
         {entries.map((entry) => (
           <Entry key={entry.entryId} entry={entry} />
         ))}
