@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import LinkComponent from './LinkComponent';
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -31,6 +33,8 @@ export default function SignIn() {
       sessionStorage.setItem('token', token);
       console.log('Signed In', user, ': received token:', token);
       console.log('username:', user);
+      // Redirects upon successful sign in
+      navigate('/list');
     } catch (error) {
       alert(`Sign in error ${error}`);
       console.error(error);
@@ -97,11 +101,6 @@ export default function SignIn() {
             placeholder="New here?"
           />
         </div>
-        {/* <LinkComponent
-          to="/list"
-          className="text-indigo-600"
-          placeholder="See all entries"
-        /> */}
       </div>
     </div>
   );

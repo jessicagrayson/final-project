@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import LinkComponent from './LinkComponent';
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -37,6 +39,7 @@ export default function SignUp() {
       }
       const user = await res.json();
       console.log('Registered:', user);
+      navigate('/list');
     } catch (error) {
       alert(`Error registering user: ${error}`);
     }
@@ -47,41 +50,54 @@ export default function SignUp() {
   };
 
   return (
-    <div>
-      <h3>Welcome! Create an account</h3>
-      <form onSubmit={handleSubmit} className="flex flex-col">
-        <label htmlFor="username" className="text-indigo-600">
-          Username:
-        </label>
-        <Input
-          id="username"
-          name="username"
-          onChange={handleUsernameChange}
-          type={'text'}
-          placeholder={''}
-          autoComplete="username"
-          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
-        />
-        <label htmlFor="password" className="text-indigo-600">
-          Password:
-        </label>
-
-        <Input
-          id="password"
-          name="password"
-          onChange={handlePasswordChange}
-          type={'password'}
-          placeholder={''}
-          autoComplete="current-password"
-          className="mt-5 ml-10 border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
-        />
-        <CustomButton type="submit" label="Sign Up" />
-      </form>
-      <LinkComponent
-        to="/list"
-        className="text-indigo-600"
-        placeholder="See all entries"
-      />
+    <div className="flex items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center gap-y-12">
+        <h3 className="text-lg font-medium">Create an Account</h3>
+        <div className="flex items-end justify-center">
+          <form onSubmit={handleSubmit} className="flex flex-col ">
+            <div className="flex flex-col gap-y-12">
+              <div className="flex flex-col">
+                <label htmlFor="username" className="text-indigo-600">
+                  Username:
+                </label>
+                <Input
+                  id="username"
+                  name="username"
+                  type={'text'}
+                  onChange={handleUsernameChange}
+                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex justify-between">
+                  <label htmlFor="password" className="text-indigo-600">
+                    Password:
+                  </label>
+                </div>
+                <Input
+                  id="password"
+                  name="password"
+                  type={'password'}
+                  onChange={handlePasswordChange}
+                  className="border-2 border-indigo-400 rounded-sm bg-zinc-200 w-80 h-9"
+                />
+              </div>
+              <CustomButton
+                className={'h-9 text-white bg-indigo-500 rounded-sm w-65'}
+                type="submit"
+                label="Welcome!"
+              />
+            </div>
+          </form>
+        </div>
+        <div className="flex justify-end w-full ">
+          <LinkComponent
+            to="/"
+            className="text-sm text-indigo-600"
+            placeholder="Sign In"
+          />
+        </div>
+      </div>
     </div>
   );
 }

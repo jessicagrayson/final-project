@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 
 export default function EntryForm() {
+  const navigate = useNavigate();
   const loc = useLocation();
   const entry = loc.state;
 
@@ -64,8 +65,7 @@ export default function EntryForm() {
         throw new Error(`Fetch error ${res.status}`);
       }
       const entry = await res.json();
-      console.log('res:', res);
-      // Replace w/ pop up modal - conditional depending on isUpdating
+      navigate('/list');
       console.log('Uploaded:', entry);
     } catch (error) {
       alert(`Error creating entry:, ${error}`);
