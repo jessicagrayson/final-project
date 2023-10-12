@@ -37,6 +37,7 @@ export default function EntryForm() {
   const handleSubmit = async (e) => {
     // Remove this preventDefault when done testing
     e.preventDefault();
+
     // Creates new entry object from values
     const newEntry = {
       location: location,
@@ -58,13 +59,7 @@ export default function EntryForm() {
       };
 
       const res = await fetch(url, req);
-      // console.log('sessionStorage:', sessionStorage);
-      // console.log('id?:', sessionStorage.userId);
-      // console.log('req:', req);
-      // console.log('req.body:', req.body);
-      // console.log('req.body.userId:', req.body.userId);
 
-      // console.log('url:', url);
       if (!res.ok) {
         throw new Error(`Fetch error ${res.status}`);
       }
