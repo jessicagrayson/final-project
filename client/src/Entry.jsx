@@ -17,13 +17,18 @@ export default function Entry({ entry }) {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      timeZone: 'UTC',
     };
     return date.toLocaleDateString('en-US', options);
   }
 
   return (
     <div className="flex space-x-4">
-      <ImageField src={entry.imageUrl} alt="Image" className="w-40 h-40 my-1" />
+      <ImageField
+        src={entry.imageUrl}
+        alt="Image"
+        className="w-40 h-40 my-1 rounded-md"
+      />
       <div className="flex flex-col">
         <div className="flex flex-col items-start">
           <Input

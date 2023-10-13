@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
-import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
+import { useState } from 'react';
 
 export default function EntryForm() {
   const navigate = useNavigate();
@@ -12,13 +12,16 @@ export default function EntryForm() {
 
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
-
+  const header = isUpdating ? 'Update entry' : 'Create an entry';
+  console.log('isUpdating', isUpdating);
+  console.log('entryId', entryId);
+  const entryTravelDate = entry?.travelDate;
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
-  const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
+  const [travelDate, setTravelDate] = useState(
+    entry?.travelDate ? formatISODate(entryTravelDate) : ''
+  );
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
-  const [imageUrl, setImageUrl] = useState(entry?.imageUrl ?? '');
-
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
@@ -31,32 +34,20 @@ export default function EntryForm() {
     setBlurb(e.target.value);
   };
 
-  const handleImageUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
-
+  // Entry submission code - authentication and authorization along with conditional PUT : POST
   const handleSubmit = async (e) => {
-    // Remove this preventDefault when done testing
     e.preventDefault();
-
-    // Creates new entry object from values
-    const newEntry = {
-      location: location,
-      travelDate: travelDate,
-      blurb: blurb,
-      imageUrl: imageUrl,
-    };
-
     try {
       const method = isUpdating ? 'PUT' : 'POST';
       const url = isUpdating ? `/api/update/${entryId}` : '/api/entryform';
+      const formData = new FormData(event.target);
+      console.log(formData);
       const req = {
         method: method,
         headers: {
-          'Content-type': 'application/json',
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
-        body: JSON.stringify(newEntry),
+        body: formData,
       };
 
       const res = await fetch(url, req);
@@ -65,6 +56,7 @@ export default function EntryForm() {
         throw new Error(`Fetch error ${res.status}`);
       }
       const entry = await res.json();
+      // Auto navigates to list upon successful creation
       navigate('/list');
       console.log('Uploaded:', entry);
     } catch (error) {
@@ -72,10 +64,21 @@ export default function EntryForm() {
     }
   };
 
+  function formatISODate(isoDate) {
+    const date = new Date(isoDate);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UCT',
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col items-center justify-center gap-y-12">
-        <h3 className="text-lg font-medium">Create an entry </h3>
+        <h3 className="text-lg font-medium">{header} </h3>
         <div className="flex items-end justify-center">
           <form onSubmit={handleSubmit} className="flex flex-col ml-4">
             <div className="flex flex-col gap-y-12">
@@ -86,6 +89,7 @@ export default function EntryForm() {
                 <Input
                   onChange={handleLocationChange}
                   value={location}
+                  name="location"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
               </div>
@@ -96,16 +100,18 @@ export default function EntryForm() {
                 <Input
                   onChange={handleTravelDateChange}
                   value={travelDate}
+                  name="travelDate"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
               </div>
               <div className="flex flex-col">
-                <label htmlFor="url" className="text-indigo-600">
+                <label htmlFor="imageUrl" className="text-indigo-600">
                   Image Url:
                 </label>
                 <Input
-                  onChange={handleImageUrlChange}
-                  value={imageUrl}
+                  accept=".png, .jpg, .jpeg, .gif"
+                  name="imageUrl"
+                  type="file"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
               </div>
@@ -113,11 +119,11 @@ export default function EntryForm() {
                 <label htmlFor="blurb" className="text-indigo-600">
                   Blurb:
                 </label>
-                <Input
+                <textarea
                   onChange={handleBlurbChange}
+                  className={`overflow-scroll h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80`}
                   value={blurb}
-                  className="h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80"
-                />
+                  name="blurb"></textarea>
               </div>
               <CustomButton
                 className={
@@ -132,10 +138,6 @@ export default function EntryForm() {
                   className="text-indigo-500"
                 />
               </div>
-              <ImageField
-                src={imageUrl}
-                className="border-2 border-lime-600 w-50 h-50"
-              />
             </div>
           </form>
         </div>

@@ -9,5 +9,3 @@ export default function CustomButton({ label, type, className }) {
     </>
   );
 }
-
-// className="h-8 text-white bg-indigo-500 rounded-sm w-80">
