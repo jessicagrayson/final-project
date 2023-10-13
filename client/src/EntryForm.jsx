@@ -14,15 +14,18 @@ export default function EntryForm() {
 
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
+  const header = isUpdating ? 'Update entry' : 'Create an entry';
   console.log('isUpdating', isUpdating);
   console.log('entryId', entryId);
-
+  const entryTravelDate = entry?.travelDate;
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
-  const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
+  const [travelDate, setTravelDate] = useState(
+    entry?.travelDate ? formatISODate(entryTravelDate) : ''
+  );
+  // const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
   // const [imageUrl, setImageUrl] = useState(entry?.imageUrl ?? '');
-
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
@@ -64,11 +67,6 @@ export default function EntryForm() {
         },
         body: formData,
       };
-      console.log('hi', req);
-      for (const key of req.body.keys()) {
-        console.log(key, req.body.get(key));
-        // console.log(req.body.get(key));
-      }
 
       const res = await fetch(url, req);
 
@@ -89,6 +87,7 @@ export default function EntryForm() {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      timeZone: 'UCT',
     };
     return date.toLocaleDateString('en-US', options);
   }
@@ -96,7 +95,7 @@ export default function EntryForm() {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="flex flex-col items-center justify-center gap-y-12">
-        <h3 className="text-lg font-medium">Create an entry </h3>
+        <h3 className="text-lg font-medium">{header} </h3>
         <div className="flex items-end justify-center">
           <form onSubmit={handleSubmit} className="flex flex-col ml-4">
             <div className="flex flex-col gap-y-12">
@@ -117,7 +116,7 @@ export default function EntryForm() {
                 </label>
                 <Input
                   onChange={handleTravelDateChange}
-                  value={travelDate ? formatISODate(travelDate) : ''}
+                  value={travelDate}
                   name="travelDate"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />

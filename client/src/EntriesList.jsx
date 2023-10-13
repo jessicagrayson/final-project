@@ -37,6 +37,10 @@ export default function EntriesList() {
     navigate('/');
   }
 
+  const entriesList = []
+    .concat(entries)
+    .sort((a, b) => (a.entryId > b.entryId ? -1 : 1));
+
   return (
     <div>
       <div className="flex justify-between mr-12">
@@ -54,7 +58,7 @@ export default function EntriesList() {
         />
       </div>
       <div className="flex flex-col items-center justify-center">
-        {entries.map((entry) => (
+        {entriesList.map((entry) => (
           <Entry key={entry.entryId} entry={entry} />
         ))}
       </div>

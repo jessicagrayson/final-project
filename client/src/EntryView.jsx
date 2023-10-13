@@ -33,6 +33,7 @@ export default function EntryView() {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      timeZone: 'UCT',
     };
     return date.toLocaleDateString('en-US', options);
   }
