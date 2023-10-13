@@ -3,7 +3,6 @@ import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import Input from './Input';
 import BlurbComponent from './BlurbComponent';
-// import { ImgWithCaption } from './ImgWithCaption';
 
 export default function Entry({ entry }) {
   const [expanded, setExpanded] = useState(false);
