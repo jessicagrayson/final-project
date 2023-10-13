@@ -28,7 +28,6 @@ export default function SignIn() {
       if (!res.ok) {
         throw new Error(`fetch Error ${res.status}`);
       }
-      // console.log('res text:', await res.text());
       const { user, token } = await res.json();
       sessionStorage.setItem('token', token);
       console.log('Signed In', user, ': received token:', token);

@@ -31,10 +31,6 @@ app.use(express.static(reactStaticDir));
 app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
-// app.get('/api/hello', (req, res) => {
-//   res.json({ message: 'Delete me!' });
-// });
-
 // Account registration function
 app.post('/api/register', async (req, res, next) => {
   try {
@@ -90,7 +86,7 @@ app.post('/api/sign-in', async (req, res, next) => {
   }
 });
 
-// POSTS new entry
+// POSTS new entry with authentication, authorization and file uploading
 app.post(
   '/api/entryform',
   authMiddleware,
@@ -242,7 +238,6 @@ app.delete('/api/delete/:entryId', async (req, res, next) => {
     res.sendStatus(204);
   } catch (error) {
     next(error);
-    // Confirm message for entryId
   }
 });
 

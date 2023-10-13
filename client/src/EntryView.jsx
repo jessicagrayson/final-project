@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import Entry from './Entry';
 import LinkComponent from './LinkComponent';
-// import { ImgWithCaption } from './ImgWithCaption';
 
 export default function EntryView() {
   const [entry, setEntry] = useState();
@@ -51,7 +49,6 @@ export default function EntryView() {
       />
 
       <div className="flex items-center justify-center">
-        {/* <Entry entry={entry} /> */}
         <div className="flex flex-col items-center justify-center w-3/4 px-12 py-8 bg-slate-100">
           <div className="w-full">
             <p className="text-xl font-medium">
@@ -62,7 +59,6 @@ export default function EntryView() {
             <div className="w-1/2">
               <img src={entry.imageUrl} alt="" />
             </div>
-            {/* <ImgWithCaption src={entry.imageUrl} value={entry.blurb} /> */}
             <div className="w-1/2 ml-4">
               <p>{entry.blurb}</p>
             </div>

@@ -2,10 +2,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
-// import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import { useState } from 'react';
-// import BlurbComponent from './BlurbComponent';
 
 export default function EntryForm() {
   const navigate = useNavigate();
@@ -23,9 +21,7 @@ export default function EntryForm() {
   const [travelDate, setTravelDate] = useState(
     entry?.travelDate ? formatISODate(entryTravelDate) : ''
   );
-  // const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
-  // const [imageUrl, setImageUrl] = useState(entry?.imageUrl ?? '');
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
@@ -38,22 +34,9 @@ export default function EntryForm() {
     setBlurb(e.target.value);
   };
 
-  // const handleImageUrlChange = (e) => {
-  //   setImageUrl(e.target.value);
-  // };
-
+  // Entry submission code - authentication and authorization along with conditional PUT : POST
   const handleSubmit = async (e) => {
-    // Remove this preventDefault when done testing
     e.preventDefault();
-
-    // Creates new entry object from values
-    // const newEntry = {
-    //   location: location,
-    //   travelDate: travelDate,
-    //   blurb: blurb,
-    //   imageUrl: imageUrl,
-    // };
-
     try {
       const method = isUpdating ? 'PUT' : 'POST';
       const url = isUpdating ? `/api/update/${entryId}` : '/api/entryform';
@@ -62,7 +45,6 @@ export default function EntryForm() {
       const req = {
         method: method,
         headers: {
-          // 'Content-type': 'application/json',
           Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
         body: formData,
@@ -74,6 +56,7 @@ export default function EntryForm() {
         throw new Error(`Fetch error ${res.status}`);
       }
       const entry = await res.json();
+      // Auto navigates to list upon successful creation
       navigate('/list');
       console.log('Uploaded:', entry);
     } catch (error) {
@@ -126,8 +109,6 @@ export default function EntryForm() {
                   Image Url:
                 </label>
                 <Input
-                  // onChange={handleImageUrlChange}
-                  // value={imageUrl}
                   accept=".png, .jpg, .jpeg, .gif"
                   name="imageUrl"
                   type="file"
@@ -138,12 +119,6 @@ export default function EntryForm() {
                 <label htmlFor="blurb" className="text-indigo-600">
                   Blurb:
                 </label>
-                {/* <BlurbComponent
-                  onChange={handleBlurbChange}
-                  value={blurb}
-                  name="blurb"
-                  className="h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80"
-                /> */}
                 <textarea
                   onChange={handleBlurbChange}
                   className={`overflow-scroll h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80`}
@@ -163,10 +138,6 @@ export default function EntryForm() {
                   className="text-indigo-500"
                 />
               </div>
-              {/* <ImageField
-                src={imageUrl}
-                className="border-2 border-lime-600 w-50 h-50"
-              /> */}
             </div>
           </form>
         </div>
