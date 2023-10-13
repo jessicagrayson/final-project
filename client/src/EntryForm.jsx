@@ -4,6 +4,7 @@ import Input from './Input';
 import CustomButton from './CustomButton';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
+import { useState } from 'react';
 
 export default function EntryForm() {
   const navigate = useNavigate();
@@ -12,24 +13,26 @@ export default function EntryForm() {
 
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
+  console.log('isUpdating', isUpdating);
+  console.log('entryId', entryId);
 
   // Entry state variables
-  // const [location, setLocation] = useState(entry?.location ?? '');
-  // const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
-  // const [blurb, setBlurb] = useState(entry?.blurb ?? '');
+  const [location, setLocation] = useState(entry?.location ?? '');
+  const [travelDate, setTravelDate] = useState(entry?.travelDate ?? '');
+  const [blurb, setBlurb] = useState(entry?.blurb ?? '');
   // const [imageUrl, setImageUrl] = useState(entry?.imageUrl ?? '');
 
-  // const handleLocationChange = (e) => {
-  //   setLocation(e.target.value);
-  // };
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+  };
 
-  // const handleTravelDateChange = (e) => {
-  //   setTravelDate(e.target.value);
-  // };
+  const handleTravelDateChange = (e) => {
+    setTravelDate(e.target.value);
+  };
 
-  // const handleBlurbChange = (e) => {
-  //   setBlurb(e.target.value);
-  // };
+  const handleBlurbChange = (e) => {
+    setBlurb(e.target.value);
+  };
 
   // const handleImageUrlChange = (e) => {
   //   setImageUrl(e.target.value);
@@ -85,8 +88,8 @@ export default function EntryForm() {
                   Location:
                 </label>
                 <Input
-                  // onChange={handleLocationChange}
-                  // value={location}
+                  onChange={handleLocationChange}
+                  value={location}
                   name="location"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
@@ -96,8 +99,8 @@ export default function EntryForm() {
                   Date:
                 </label>
                 <Input
-                  // onChange={handleTravelDateChange}
-                  // value={travelDate}
+                  onChange={handleTravelDateChange}
+                  value={travelDate}
                   name="travelDate"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
@@ -109,7 +112,6 @@ export default function EntryForm() {
                 <Input
                   // onChange={handleImageUrlChange}
                   // value={imageUrl}
-
                   accept=".png, .jpg, .jpeg, .gif"
                   name="imageUrl"
                   type="file"
@@ -121,8 +123,8 @@ export default function EntryForm() {
                   Blurb:
                 </label>
                 <Input
-                  // onChange={handleBlurbChange}
-                  // value={blurb}
+                  onChange={handleBlurbChange}
+                  value={blurb}
                   name="blurb"
                   className="h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80"
                 />
@@ -141,9 +143,8 @@ export default function EntryForm() {
                 />
               </div>
               <ImageField
-
-              // src={imageUrl}
-              // className="border-2 border-lime-600 w-50 h-50"
+                // src={imageUrl}
+                className="border-2 border-lime-600 w-50 h-50"
               />
             </div>
           </form>
