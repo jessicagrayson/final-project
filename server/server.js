@@ -184,7 +184,7 @@ app.put('/api/update/:entryId', async (req, res, next) => {
     const entryId = Number(req.params.entryId);
     validateEntryId(entryId);
     const { imageUrl, location, travelDate, blurb } = req.body;
-
+    console.log('hi!!!!!!!!!', entryId, imageUrl, location, travelDate, blurb);
     // Create sql object
     const sql = `
     UPDATE "entries"

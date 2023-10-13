@@ -39,7 +39,7 @@ export default function EntriesList() {
 
   return (
     <div>
-      <div className="flex justify-between ">
+      <div className="flex justify-between mr-12">
         <LinkComponent
           to="/create-entry"
           placeholder="Create New Entry"

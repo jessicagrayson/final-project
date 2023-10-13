@@ -2,9 +2,10 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
-import ImageField from './ImageField';
+// import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import { useState } from 'react';
+// import BlurbComponent from './BlurbComponent';
 
 export default function EntryForm() {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ export default function EntryForm() {
       const method = isUpdating ? 'PUT' : 'POST';
       const url = isUpdating ? `/api/update/${entryId}` : '/api/entryform';
       const formData = new FormData(event.target);
+      console.log(formData);
       const req = {
         method: method,
         headers: {
@@ -62,6 +64,11 @@ export default function EntryForm() {
         },
         body: formData,
       };
+      console.log('hi', req);
+      for (const key of req.body.keys()) {
+        console.log(key, req.body.get(key));
+        // console.log(req.body.get(key));
+      }
 
       const res = await fetch(url, req);
 
@@ -75,6 +82,16 @@ export default function EntryForm() {
       alert(`Error creating entry:, ${error}`);
     }
   };
+
+  function formatISODate(isoDate) {
+    const date = new Date(isoDate);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return date.toLocaleDateString('en-US', options);
+  }
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -100,7 +117,7 @@ export default function EntryForm() {
                 </label>
                 <Input
                   onChange={handleTravelDateChange}
-                  value={travelDate}
+                  value={travelDate ? formatISODate(travelDate) : ''}
                   name="travelDate"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
@@ -122,12 +139,17 @@ export default function EntryForm() {
                 <label htmlFor="blurb" className="text-indigo-600">
                   Blurb:
                 </label>
-                <Input
+                {/* <BlurbComponent
                   onChange={handleBlurbChange}
                   value={blurb}
                   name="blurb"
                   className="h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80"
-                />
+                /> */}
+                <textarea
+                  onChange={handleBlurbChange}
+                  className={`overflow-scroll h-40 border-2 border-indigo-400 text-zinc-600 focus:bg-white bg-zinc-100 w-80`}
+                  value={blurb}
+                  name="blurb"></textarea>
               </div>
               <CustomButton
                 className={
@@ -142,10 +164,10 @@ export default function EntryForm() {
                   className="text-indigo-500"
                 />
               </div>
-              <ImageField
-                // src={imageUrl}
+              {/* <ImageField
+                src={imageUrl}
                 className="border-2 border-lime-600 w-50 h-50"
-              />
+              /> */}
             </div>
           </form>
         </div>

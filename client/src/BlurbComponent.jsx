@@ -5,7 +5,7 @@ export default function BlurbComponent({ value, className, onChange }) {
     <div>
       <textarea
         onChange={onChange}
-        className={`w-full${className}`}
+        className={`w-full overflow-scroll ${className}`}
         value={value}></textarea>
     </div>
   );
