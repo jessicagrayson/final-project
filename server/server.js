@@ -3,7 +3,12 @@ import express from 'express';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import pg from 'pg';
-import { ClientError, errorMiddleware, authMiddleware } from './lib/index.js';
+import {
+  ClientError,
+  errorMiddleware,
+  authMiddleware,
+  uploadsMiddleware,
+} from './lib/index.js';
 
 const connectionString =
   process.env.DATABASE_URL ||
@@ -86,31 +91,42 @@ app.post('/api/sign-in', async (req, res, next) => {
 });
 
 // POSTS new entry
-app.post('/api/entryform', authMiddleware, async (req, res, next) => {
-  try {
-    if (!req.user) {
-      throw new ClientError(401, 'User is not logged in');
-    }
+app.post(
+  '/api/entryform',
+  authMiddleware,
+  uploadsMiddleware.single('imageUrl'),
+  async (req, res, next) => {
+    console.log('req:', req.body);
+    console.log('req:', req.file);
 
-    const { location, travelDate, blurb, imageUrl } = req.body;
-    // Validates entry form data - throws error if invalid
-    if (!location || !travelDate || !blurb || !imageUrl) {
-      throw new ClientError(400, 'all fields are required');
-    }
-    // Creates sql for new entry
-    const insertEntrySql = `
+    try {
+      if (!req.user) {
+        throw new ClientError(401, 'User is not logged in');
+      }
+      const file = req.file;
+      const { location, travelDate, blurb } = req.body;
+      // Validates entry form data - throws error if invalid
+      if (!location || !travelDate || !blurb || !file) {
+        throw new ClientError(400, 'all fields are required');
+      }
+
+      const url = `/images/${file.filename}`;
+
+      // Creates sql for new entry
+      const insertEntrySql = `
     INSERT INTO "entries" ("userId", "location", "travelDate", "blurb", "imageUrl")
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *
     `;
-    const params = [req.user.userId, location, travelDate, blurb, imageUrl];
-    const response = await db.query(insertEntrySql, params);
-    // Responds with new entry data
-    res.status(201).json(response.rows[0]);
-  } catch (error) {
-    next(error);
+      const params = [req.user.userId, location, travelDate, blurb, url];
+      const response = await db.query(insertEntrySql, params);
+      // Responds with new entry data
+      res.status(201).json(response.rows[0]);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // GETS entry values by id
 app.get('/api/entries/:entryId', async (req, res, next) => {
