@@ -179,34 +179,48 @@ app.get('/api/entries', authMiddleware, async (req, res, next) => {
 });
 
 // PUT (updates) an entry by id
-app.put('/api/update/:entryId', async (req, res, next) => {
-  try {
-    const entryId = Number(req.params.entryId);
-    validateEntryId(entryId);
-    const { imageUrl, location, travelDate, blurb } = req.body;
-    console.log('hi!!!!!!!!!', entryId, imageUrl, location, travelDate, blurb);
-    // Create sql object
-    const sql = `
+app.put(
+  '/api/update/:entryId',
+  authMiddleware,
+  uploadsMiddleware.single('imageUrl'),
+  async (req, res, next) => {
+    try {
+      const entryId = Number(req.params.entryId);
+      validateEntryId(entryId);
+      const file = req.file;
+      const { location, travelDate, blurb } = req.body;
+      if (!location || !travelDate || !blurb || !file) {
+        throw new ClientError(400, 'all fields are required');
+      }
+
+      const url = `/images/${file.filename}`;
+
+      // Create sql object
+      const sql = `
     UPDATE "entries"
-    SET "imageUrl" = $2,
-    "location" = $3,
-    "travelDate" = $4,
-    "blurb" = $5
+    SET "imageUrl" = $5,
+    "location" = $2,
+    "travelDate" = $3,
+    "blurb" = $4
     WHERE "entryId" = $1
     RETURNING *
 `;
-    // Set query params
-    const params = [entryId, imageUrl, location, travelDate, blurb];
-    const result = await db.query(sql, params);
-    const entry = result.rows[0];
-    if (!entry) {
-      throw new ClientError(404, `Cannot find entry with "entryId" ${entryId}`);
+      // Set query params
+      const params = [entryId, location, travelDate, blurb, url];
+      const result = await db.query(sql, params);
+      const entry = result.rows[0];
+      if (!entry) {
+        throw new ClientError(
+          404,
+          `Cannot find entry with "entryId" ${entryId}`
+        );
+      }
+      res.json(entry);
+    } catch (error) {
+      next(error);
     }
-    res.json(entry);
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 // DELETES an entry
 app.delete('/api/delete/:entryId', async (req, res, next) => {
