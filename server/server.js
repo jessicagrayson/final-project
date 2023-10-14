@@ -72,29 +72,25 @@ app.post('/api/sign-in', async (req, res, next) => {
       throw new ClientError(401, 'Invalid login credentials');
     }
     const { userId, hashedPassword } = user;
-    console.log('user:', user);
+
     if (!(await argon2.verify(hashedPassword, password))) {
       throw new ClientError(401, 'Invalid login credentials');
     }
     const payload = { userId, username };
-    console.log('payload:', payload);
     const token = jwt.sign(payload, process.env.TOKEN_SECRET);
     res.json({ token, user: payload });
-    console.log('res:', res);
   } catch (error) {
     next(error);
   }
 });
 
+// RELEVANT CODE HERE
 // POSTS new entry with authentication, authorization and file uploading
 app.post(
   '/api/entryform',
   authMiddleware,
   uploadsMiddleware.single('imageUrl'),
   async (req, res, next) => {
-    console.log('req:', req.body);
-    console.log('req:', req.file);
-
     try {
       if (!req.user) {
         throw new ClientError(401, 'User is not logged in');
@@ -123,56 +119,6 @@ app.post(
     }
   }
 );
-
-// GETS entry values by id
-app.get('/api/entries/:entryId', async (req, res, next) => {
-  try {
-    const entryId = Number(req.params.entryId);
-    if (!Number.isInteger(entryId) || entryId <= 0) {
-      throw new ClientError(400, '"entryId" must be an integer');
-    }
-    const sql = `
-    SELECT * from "entries"
-    WHERE "entryId" = $1
-    `;
-
-    const params = [entryId];
-    const result = await db.query(sql, params);
-    const entry = result.rows[0];
-
-    if (!entry) {
-      throw new ClientError(404, `Cannot find entry with ID ${entryId}`);
-    }
-
-    res.status(200).json(entry);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// GETS all entries
-app.get('/api/entries', authMiddleware, async (req, res, next) => {
-  console.log('req1:', req);
-  try {
-    if (!req.user) {
-      throw new ClientError(401, 'You are not logged in');
-    }
-    console.log('req2:', req);
-
-    const sql = `
-    SELECT * from "entries"
-    WHERE "userId" = $1
-    `;
-    const result = await db.query(sql, [req.user.userId]);
-    const entries = result.rows;
-    if (!entries) {
-      return res.status(404).json({ error: 'No entries found' });
-    }
-    res.status(200).json(entries);
-  } catch (error) {
-    next(error);
-  }
-});
 
 // PUT (updates) an entry by id
 app.put(
@@ -217,6 +163,99 @@ app.put(
     }
   }
 );
+// RELEVANT CODE ENDS
+
+// GETS entry values by id
+app.get('/api/entries/:entryId', async (req, res, next) => {
+  try {
+    const entryId = Number(req.params.entryId);
+    if (!Number.isInteger(entryId) || entryId <= 0) {
+      throw new ClientError(400, '"entryId" must be an integer');
+    }
+    const sql = `
+    SELECT * from "entries"
+    WHERE "entryId" = $1
+    `;
+
+    const params = [entryId];
+    const result = await db.query(sql, params);
+    const entry = result.rows[0];
+
+    if (!entry) {
+      throw new ClientError(404, `Cannot find entry with ID ${entryId}`);
+    }
+
+    res.status(200).json(entry);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GETS all entries
+app.get('/api/entries', authMiddleware, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new ClientError(401, 'You are not logged in');
+    }
+
+    const sql = `
+    SELECT * from "entries"
+    WHERE "userId" = $1
+    `;
+    const result = await db.query(sql, [req.user.userId]);
+    const entries = result.rows;
+    if (!entries) {
+      return res.status(404).json({ error: 'No entries found' });
+    }
+    res.status(200).json(entries);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// // PUT (updates) an entry by id
+// app.put(
+//   '/api/update/:entryId',
+//   authMiddleware,
+//   uploadsMiddleware.single('imageUrl'),
+//   async (req, res, next) => {
+//     try {
+//       const entryId = Number(req.params.entryId);
+//       validateEntryId(entryId);
+//       const file = req.file;
+//       const { location, travelDate, blurb } = req.body;
+//       if (!location || !travelDate || !blurb || !file) {
+//         throw new ClientError(400, 'all fields are required');
+//       }
+
+//       const url = `/images/${file.filename}`;
+
+//       // Create sql object
+//       const sql = `
+//     UPDATE "entries"
+//     SET "imageUrl" = $5,
+//     "location" = $2,
+//     "travelDate" = $3,
+//     "blurb" = $4
+//     WHERE "entryId" = $1
+//     RETURNING *
+// `;
+//       // Set query params
+//       const params = [entryId, location, travelDate, blurb, url];
+//       const result = await db.query(sql, params);
+//       const entry = result.rows[0];
+//       if (!entry) {
+//         throw new ClientError(
+//           404,
+//           `Cannot find entry with "entryId" ${entryId}`
+//         );
+//       }
+//       res.json(entry);
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
 // DELETES an entry
 app.delete('/api/delete/:entryId', async (req, res, next) => {

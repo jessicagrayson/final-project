@@ -20,11 +20,9 @@
 //   }
 //   fetchEntries();
 // }, []);
-// console.log(entry);
 
 //   function handleClick() {
 //     // This needs to be changed later - functional for now.
-//     console.log('clicked');
 //   }
 
 //   return (

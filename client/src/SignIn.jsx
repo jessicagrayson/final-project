@@ -16,8 +16,8 @@ export default function SignIn() {
     try {
       const formData = new FormData(event.currentTarget);
       const userData = Object.fromEntries(formData.entries());
-      console.log('formData:', formData);
-      console.log('userData:', userData);
+      // console.log('formData:', formData);
+      // console.log('userData:', userData);
       const req = {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
