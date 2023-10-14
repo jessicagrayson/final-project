@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Entry from './Entry';
-import LinkComponent from './LinkComponent';
+// import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
@@ -32,10 +32,10 @@ export default function EntriesList() {
     fetchData();
   }, []);
 
-  function handleSignOut() {
-    sessionStorage.removeItem('token');
-    navigate('/');
-  }
+  // function handleSignOut() {
+  //   sessionStorage.removeItem('token');
+  //   navigate('/');
+  // }
 
   const entriesList = []
     .concat(entries)
@@ -43,7 +43,7 @@ export default function EntriesList() {
 
   return (
     <div>
-      <div className="flex justify-between mr-12">
+      {/* <div className="flex justify-between mr-12">
         <LinkComponent
           to="/create-entry"
           placeholder="Create New Entry"
@@ -56,7 +56,7 @@ export default function EntriesList() {
           placeholder="Sign Out"
           className="text-rose-400"
         />
-      </div>
+      </div> */}
       <div className="flex flex-col items-center justify-center">
         {entriesList.map((entry) => (
           <Entry key={entry.entryId} entry={entry} />

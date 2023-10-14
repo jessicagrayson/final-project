@@ -1,30 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import GophrLogo from './GophrLogo';
-import LinkComponent from './LinkComponent';
+import FadeMenu from './MenuCustomList';
 
 export default function NavBar() {
-  const navigate = useNavigate();
-  function handleSignOut() {
-    sessionStorage.removeItem('token');
-    navigate('/');
-  }
-
   return (
-    <div className="flex justify-between mr-12">
+    <div className="flex justify-between p-1">
       <GophrLogo />
-      <LinkComponent
-        to="/create-entry"
-        placeholder="Create New Entry"
-        className="text-indigo-500"
-      />
 
-      <LinkComponent
-        onClick={handleSignOut}
-        to="/"
-        placeholder="Sign Out"
-        className="text-rose-400"
-      />
+      <FadeMenu />
     </div>
   );
 }
