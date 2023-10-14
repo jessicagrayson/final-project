@@ -23,7 +23,7 @@ export default function Entry({ entry }) {
   }
 
   return (
-    <div className="flex p-2 mb-2 space-x-4 rounded-md bg-slate-100">
+    <div className="flex  p-3 mb-2 space-x-4 rounded-md bg-slate-100 hover:-translate-y-0.5 transition ease-in-out delay-50">
       <ImageField
         src={entry.imageUrl}
         alt="Image"
@@ -57,7 +57,7 @@ export default function Entry({ entry }) {
         <LinkComponent
           to={`/entries/${entry.entryId}`}
           onClick={handleExpandClick}
-          placeholder={expanded ? 'Collapse' : 'Expand Entry'}
+          placeholder={expanded ? 'Collapse' : 'Details'}
           className="text-xs text-indigo-400 hover:underline hover:text-indigo-600"
         />
       </div>
