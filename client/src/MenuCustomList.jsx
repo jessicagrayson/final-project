@@ -29,8 +29,13 @@ export default function FadeMenu() {
         aria-controls={open ? 'fade-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
+        style={{
+          color: '#6366f1',
+          fontWeight: 600,
+          fontSize: '16px',
+        }}
         onClick={handleClick}>
-        Options
+        More
       </Button>
       <Menu
         id="fade-menu"
