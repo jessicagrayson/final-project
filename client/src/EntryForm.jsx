@@ -13,8 +13,6 @@ export default function EntryForm() {
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
   const header = isUpdating ? 'Update entry' : 'Create an entry';
-  console.log('isUpdating', isUpdating);
-  console.log('entryId', entryId);
   const entryTravelDate = entry?.travelDate;
   // Entry state variables
   const [location, setLocation] = useState(entry?.location ?? '');
@@ -41,7 +39,6 @@ export default function EntryForm() {
       const method = isUpdating ? 'PUT' : 'POST';
       const url = isUpdating ? `/api/update/${entryId}` : '/api/entryform';
       const formData = new FormData(event.target);
-      console.log(formData);
       const req = {
         method: method,
         headers: {

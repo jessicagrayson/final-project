@@ -23,7 +23,7 @@ export default function Entry({ entry }) {
   }
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex  p-3 mb-2 space-x-4 rounded-md bg-slate-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
       <ImageField
         src={entry.imageUrl}
         alt="Image"
@@ -32,13 +32,13 @@ export default function Entry({ entry }) {
       <div className="flex flex-col">
         <div className="flex flex-col items-start">
           <Input
-            className="text-sm font-semibold"
+            className="text-sm font-semibold bg-slate-200"
             placeholder="Location"
             value={entry.location}
             onChange={(e) => entry.onChange('location', e.target.value)}
           />
           <Input
-            className="text-sm font-medium"
+            className="text-sm font-medium bg-slate-200"
             placeholder="Travel Date"
             value={formatISODate(entry.travelDate)}
             onChange={(e) => entry.onChange('Travel Date', e.target.value)}
@@ -57,7 +57,8 @@ export default function Entry({ entry }) {
         <LinkComponent
           to={`/entries/${entry.entryId}`}
           onClick={handleExpandClick}
-          placeholder={expanded ? 'Collapse' : 'Expand Entry'}
+          // NOTE TO SELF: Is this logic needed?
+          placeholder={expanded ? 'Collapse' : 'Details'}
           className="text-xs text-indigo-400 hover:underline hover:text-indigo-600"
         />
       </div>

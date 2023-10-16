@@ -5,12 +5,12 @@ import EntryForm from './EntryForm.jsx';
 import EntryView from './EntryView.jsx';
 import EntriesList from './EntriesList.jsx';
 import ForgottenPassword from './ForgottenPassword.jsx';
-import GophrLogo from './GophrLogo.jsx';
+import NavBar from './NavBar.jsx';
 
 export default function App() {
   return (
     <div>
-      <GophrLogo />
+      <NavBar />
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />

@@ -43,10 +43,6 @@ export default function SignUp() {
     } catch (error) {
       alert(`Error registering user: ${error}`);
     }
-    // Logs new values
-    // console.log('username:', username);
-    // console.log('password', password);
-    // console.log('newUser', newUser);
   };
 
   return (

@@ -3,8 +3,6 @@
 //   authMiddleware,
 //   uploadsMiddleware.single('imageUrl'),
 //   async (req, res, next) => {
-//     // console.log('req:', req.body);
-//     // console.log('req:', req.file);
 
 //     try {
 //       if (!req.user) {
