@@ -57,7 +57,7 @@ export default function EntriesList() {
           className="text-rose-400"
         />
       </div> */}
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
         {entriesList.map((entry) => (
           <Entry key={entry.entryId} entry={entry} />
         ))}
