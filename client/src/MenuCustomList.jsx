@@ -5,8 +5,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import LinkComponent from './LinkComponent';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 export default function FadeMenu() {
+  <FontAwesomeIcon icon={faBars} />;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -35,7 +38,7 @@ export default function FadeMenu() {
           fontSize: '16px',
         }}
         onClick={handleClick}>
-        More
+        <FontAwesomeIcon icon={faBars} />
       </Button>
       <Menu
         id="fade-menu"
