@@ -27,20 +27,16 @@ export default function EntryView() {
 
   async function removeEntry() {
     console.log(entryId);
-    console.log('one');
     try {
-      console.log('tw0');
       const res = await fetch(`/api/delete/${entryId}`, {
         method: 'DELETE',
       });
-      console.log('three');
       if (!res.ok) {
         throw new Error(`Network status not okay: ${res.status}`);
       }
     } catch (error) {
       console.error(error);
     }
-    console.log('four');
     // console.log(entryId);
   }
 
@@ -48,6 +44,7 @@ export default function EntryView() {
     await removeEntry();
     console.log(entryId);
     // navigate('/list');
+    handleRemove();
   }
 
   function formatISODate(isoDate) {
@@ -96,11 +93,12 @@ export default function EntryView() {
               className="text-indigo-500"
             />
             <LinkComponent
-              debugger
-              onClick={handleRemove(entryId)}
-              to="/list"
+              // debugger
+              onClick={handleRemove}
+              // to="/list"
               placeholder="Delete"
               className="text-rose-500"
+              debugger
             />
           </div>
         </div>
