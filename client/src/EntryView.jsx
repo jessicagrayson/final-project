@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import LinkComponent from './LinkComponent';
+import ViewMenu from './EntryViewMenu';
 
 export default function EntryView() {
   const [entry, setEntry] = useState();
@@ -26,23 +28,23 @@ export default function EntryView() {
     }
   }, [entryId]);
 
-  async function removeEntry() {
-    try {
-      const res = await fetch(`/api/delete/${entryId}`, {
-        method: 'DELETE',
-      });
-      if (!res.ok) {
-        throw new Error(`Network status not okay: ${res.status}`);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // async function removeEntry() {
+  //   try {
+  //     const res = await fetch(`/api/delete/${entryId}`, {
+  //       method: 'DELETE',
+  //     });
+  //     if (!res.ok) {
+  //       throw new Error(`Network status not okay: ${res.status}`);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
-  async function handleRemove() {
-    await removeEntry();
-    navigate('/list');
-  }
+  // async function handleRemove() {
+  //   await removeEntry();
+  //   navigate('/list');
+  // }
 
   function formatISODate(isoDate) {
     const date = new Date(isoDate);
@@ -80,10 +82,11 @@ export default function EntryView() {
             </div>
             <div className="w-1/2 ml-4">
               <p>{entry.blurb}</p>
+              <ViewMenu />
             </div>
           </div>
           <div className="w-full mt-4">
-            <LinkComponent
+            {/* <LinkComponent
               to="/update-entry/:entryId"
               state={entry}
               placeholder="Edit Entry"
@@ -93,7 +96,7 @@ export default function EntryView() {
               onClick={() => handleRemove(entry.entryId)}
               placeholder="Delete"
               className="text-rose-500"
-            />
+            /> */}
           </div>
         </div>
       </div>
