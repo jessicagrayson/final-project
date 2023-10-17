@@ -61,33 +61,6 @@ export default function EntryForm() {
     }
   };
 
-  console.log(entryId);
-
-  async function removeEntry() {
-    console.log(entryId);
-    console.log('one');
-    try {
-      console.log('tw0');
-      const res = await fetch(`/api/delete/${entryId}`, {
-        method: 'DELETE',
-      });
-      console.log('three');
-      if (!res.ok) {
-        throw new Error(`Network status not okay: ${res.status}`);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    console.log('four');
-    // console.log(entryId);
-  }
-
-  async function handleRemove() {
-    await removeEntry();
-    // console.log(entryId);
-    // navigate('/list');
-  }
-
   function formatISODate(isoDate) {
     const date = new Date(isoDate);
     const options = {
@@ -162,11 +135,6 @@ export default function EntryForm() {
                   className="text-indigo-500"
                 />
               </div>
-              <LinkComponent
-                onClick={() => handleRemove(entryId)}
-                placeholder="Delete"
-                className="text-rose-500"
-              />
             </div>
           </form>
         </div>

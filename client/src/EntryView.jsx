@@ -37,14 +37,13 @@ export default function EntryView() {
     } catch (error) {
       console.error(error);
     }
-    // console.log(entryId);
+    // handleRemove();
   }
 
   async function handleRemove() {
     await removeEntry();
     console.log(entryId);
     // navigate('/list');
-    handleRemove();
   }
 
   function formatISODate(isoDate) {
@@ -94,7 +93,7 @@ export default function EntryView() {
             />
             <LinkComponent
               // debugger
-              onClick={handleRemove}
+              onClick={() => handleRemove(entry.entryId)}
               // to="/list"
               placeholder="Delete"
               className="text-rose-500"
