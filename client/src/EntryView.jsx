@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import LinkComponent from './LinkComponent';
 
 export default function EntryView() {
   const [entry, setEntry] = useState();
   const { entryId } = useParams();
+  const navigate = useNavigate();
 
   // Fetches entry by entryId
   useEffect(() => {
@@ -37,13 +38,12 @@ export default function EntryView() {
     } catch (error) {
       console.error(error);
     }
-    // handleRemove();
   }
 
   async function handleRemove() {
-    await removeEntry();
     console.log(entryId);
-    // navigate('/list');
+    await removeEntry();
+    navigate('/list');
   }
 
   function formatISODate(isoDate) {
@@ -92,12 +92,9 @@ export default function EntryView() {
               className="text-indigo-500"
             />
             <LinkComponent
-              // debugger
               onClick={() => handleRemove(entry.entryId)}
-              // to="/list"
               placeholder="Delete"
               className="text-rose-500"
-              debugger
             />
           </div>
         </div>
