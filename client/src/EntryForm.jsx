@@ -61,21 +61,30 @@ export default function EntryForm() {
     }
   };
 
-  async function removeEntry(entryId) {
+  console.log(entryId);
+
+  async function removeEntry() {
+    console.log(entryId);
+    console.log('one');
     try {
+      console.log('tw0');
       const res = await fetch(`/api/delete/${entryId}`, {
         method: 'DELETE',
       });
+      console.log('three');
       if (!res.ok) {
         throw new Error(`Network status not okay: ${res.status}`);
       }
     } catch (error) {
       console.error(error);
     }
+    console.log('four');
+    // console.log(entryId);
   }
 
   async function handleRemove() {
-    await removeEntry(entryId);
+    await removeEntry();
+    // console.log(entryId);
     // navigate('/list');
   }
 
@@ -154,7 +163,7 @@ export default function EntryForm() {
                 />
               </div>
               <LinkComponent
-                onClick={handleRemove(entryId)}
+                onClick={() => handleRemove(entryId)}
                 placeholder="Delete"
                 className="text-rose-500"
               />

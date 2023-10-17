@@ -25,34 +25,30 @@ export default function EntryView() {
     }
   }, [entryId]);
 
-  // async function removeEntry(entryId) {
-  //   console.log('one');
-  //   try {
-  //     console.log('two');
-  //     const res = await fetch(`/api/delete/${entryId}`, {
-  //       method: 'DELETE',
-  //     });
-  //     console.log('three');
+  async function removeEntry() {
+    console.log(entryId);
+    console.log('one');
+    try {
+      console.log('tw0');
+      const res = await fetch(`/api/delete/${entryId}`, {
+        method: 'DELETE',
+      });
+      console.log('three');
+      if (!res.ok) {
+        throw new Error(`Network status not okay: ${res.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    console.log('four');
+    // console.log(entryId);
+  }
 
-  //     if (!res.ok) {
-  //       console.log('four');
-  //       throw new Error(`Network status not okay: ${res.status}`);
-  //     }
-  //   } catch (error) {
-  //     console.log('five');
-  //     console.error(error);
-  //   }
-  //   console.log('six');
-  // }
-
-  // async function handleRemove() {
-  //   console.log('seven');
-
-  //   await removeEntry(entry.entryId);
-  //   console.log('eight');
-
-  //   console.log('Delete successful');
-  // }
+  async function handleRemove() {
+    await removeEntry();
+    console.log(entryId);
+    // navigate('/list');
+  }
 
   function formatISODate(isoDate) {
     const date = new Date(isoDate);
@@ -99,12 +95,13 @@ export default function EntryView() {
               placeholder="Edit Entry"
               className="text-indigo-500"
             />
-            {/* <LinkComponent
-              onClick={handleRemove(entry.entryId)}
+            <LinkComponent
+              debugger
+              onClick={handleRemove(entryId)}
               to="/list"
               placeholder="Delete"
               className="text-rose-500"
-            /> */}
+            />
           </div>
         </div>
       </div>
