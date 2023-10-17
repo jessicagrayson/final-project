@@ -27,7 +27,6 @@ export default function EntryView() {
   }, [entryId]);
 
   async function removeEntry() {
-    console.log(entryId);
     try {
       const res = await fetch(`/api/delete/${entryId}`, {
         method: 'DELETE',
@@ -41,7 +40,6 @@ export default function EntryView() {
   }
 
   async function handleRemove() {
-    console.log(entryId);
     await removeEntry();
     navigate('/list');
   }
