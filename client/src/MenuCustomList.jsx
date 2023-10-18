@@ -35,7 +35,7 @@ export default function FadeMenu() {
         style={{
           color: '#6366f1',
           fontWeight: 600,
-          fontSize: '16px',
+          fontSize: '22px',
         }}
         onClick={handleClick}>
         <FontAwesomeIcon icon={faBars} />
