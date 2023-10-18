@@ -28,24 +28,7 @@ export default function EntryView() {
     }
   }, [entryId]);
 
-  // async function removeEntry() {
-  //   try {
-  //     const res = await fetch(`/api/delete/${entryId}`, {
-  //       method: 'DELETE',
-  //     });
-  //     if (!res.ok) {
-  //       throw new Error(`Network status not okay: ${res.status}`);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  // async function handleRemove() {
-  //   await removeEntry();
-  //   navigate('/list');
-  // }
-
+  // Formats entry date
   function formatISODate(isoDate) {
     const date = new Date(isoDate);
     const options = {
@@ -62,13 +45,12 @@ export default function EntryView() {
   }
 
   return (
-    <div className="">
+    <div className="ml-2">
       <LinkComponent
         to="/list"
         placeholder="Back"
-        className="text-indigo-500"
+        className="text-xl text-indigo-500 hover:underline"
       />
-
       <div className="flex items-center justify-center">
         <div className="flex flex-col items-center justify-center w-3/4 px-12 py-8 bg-slate-100">
           <div className="w-full">
@@ -85,19 +67,7 @@ export default function EntryView() {
               <ViewMenu />
             </div>
           </div>
-          <div className="w-full mt-4">
-            {/* <LinkComponent
-              to="/update-entry/:entryId"
-              state={entry}
-              placeholder="Edit Entry"
-              className="text-indigo-500"
-            />
-            <LinkComponent
-              onClick={() => handleRemove(entry.entryId)}
-              placeholder="Delete"
-              className="text-rose-500"
-            /> */}
-          </div>
+          <div className="w-full mt-4"></div>
         </div>
       </div>
     </div>
