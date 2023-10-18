@@ -59,10 +59,10 @@ export default function EntryView() {
             </p>
           </div>
           <div className="flex">
-            <div className="w-1/2">
-              <img src={entry.imageUrl} alt="" />
+            <div className="w-2/3">
+              <img src={entry.imageUrl} />
             </div>
-            <div className="w-1/2 ml-4">
+            <div className="w-1/3 ml-4">
               <p>{entry.blurb}</p>
               <ViewMenu />
             </div>
