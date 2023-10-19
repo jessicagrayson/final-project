@@ -57,9 +57,8 @@ export default function Entry({ entry }) {
         <LinkComponent
           to={`/entries/${entry.entryId}`}
           onClick={handleExpandClick}
-          // NOTE TO SELF: Is this logic needed?
           placeholder={expanded ? 'Collapse' : 'Details'}
-          className="text-xs text-indigo-400 hover:underline hover:text-indigo-600"
+          className="text-sm text-indigo-500 hover:underline hover:text-indigo-600"
         />
       </div>
     </div>

@@ -32,31 +32,12 @@ export default function EntriesList() {
     fetchData();
   }, []);
 
-  // function handleSignOut() {
-  //   sessionStorage.removeItem('token');
-  //   navigate('/');
-  // }
-
   const entriesList = []
     .concat(entries)
     .sort((a, b) => (a.entryId > b.entryId ? -1 : 1));
 
   return (
     <div>
-      {/* <div className="flex justify-between mr-12">
-        <LinkComponent
-          to="/create-entry"
-          placeholder="Create New Entry"
-          className="text-indigo-500"
-        />
-
-        <LinkComponent
-          onClick={handleSignOut}
-          to="/"
-          placeholder="Sign Out"
-          className="text-rose-400"
-        />
-      </div> */}
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
         {entriesList.map((entry) => (
           <Entry key={entry.entryId} entry={entry} />
