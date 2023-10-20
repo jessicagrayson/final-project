@@ -22,7 +22,6 @@ export default function EntriesList() {
           throw new Error('Failed to fetch data');
         }
         const data = await res.json();
-        console.log('data:', data);
         setEntries(data);
       } catch (error) {
         console.error(error);

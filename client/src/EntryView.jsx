@@ -58,10 +58,10 @@ export default function EntryView() {
               <img src={entry.imageUrl} className="rounded-md" />
             </div>
             <div className="flex flex-col w-full p-4 rounded-sm lg:ml-4 md:ml-4 lg:w-1/3 md:w-1/3 bg-slate-100">
-              <div className="bg-yellow-400">
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <ViewMenu />
               </div>
-              <p className="mb-2 font-medium text-md">
+              <p className="mb-3 font-medium text-md">
                 {entry.location} | {formatISODate(entry.travelDate)}
               </p>
               <p className="leading-normal">{entry.blurb}</p>
