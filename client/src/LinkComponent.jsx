@@ -7,10 +7,16 @@ export default function LinkComponent({
   placeholder,
   entry,
   state,
+  onClick,
 }) {
   return (
     <div>
-      <Link to={to} state={state} className={className} entry={entry}>
+      <Link
+        onClick={onClick}
+        to={to}
+        state={state}
+        className={className}
+        entry={entry}>
         {placeholder}
       </Link>
     </div>
