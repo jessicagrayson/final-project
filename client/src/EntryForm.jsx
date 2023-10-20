@@ -78,7 +78,7 @@ export default function EntryForm() {
         <h3 className="text-lg font-medium">{header} </h3>
         <div className="flex items-end justify-center">
           <form onSubmit={handleSubmit} className="flex flex-col ml-4">
-            <div className="flex flex-col gap-y-12">
+            <div className="flex flex-col gap-y-8">
               <div className="flex flex-col">
                 <label htmlFor="location" className="text-indigo-600">
                   Location:

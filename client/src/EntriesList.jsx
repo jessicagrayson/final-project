@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import Entry from './Entry';
-// import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
-  // const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
