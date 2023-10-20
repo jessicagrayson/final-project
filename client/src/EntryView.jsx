@@ -53,12 +53,12 @@ export default function EntryView() {
       />
       <div className="flex items-center justify-center">
         <div className="flex flex-col-reverse items-center justify-center px-12 py-8 lg:w-3/4 md:w-3/4">
-          <div className="w-full">
-            {/* <p className="text-xl font-medium">
+          {/* <div className="w-full"> */}
+          {/* <p className="text-xl font-medium">
               {entry.location} | {formatISODate(entry.travelDate)}
             </p> */}
-          </div>
-          <div className="flex flex-col lg:flex-row md:flex-row">
+          {/* </div> */}
+          <div className="flex flex-col gap-3 lg:flex-row md:flex-row">
             <div className="w-full lg:w-2/3 md:2/3">
               <img src={entry.imageUrl} className="rounded-md" />
             </div>
