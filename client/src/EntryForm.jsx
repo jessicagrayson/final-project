@@ -20,6 +20,8 @@ export default function EntryForm() {
     entry?.travelDate ? formatISODate(entryTravelDate) : ''
   );
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
+
+  // Event handlers
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
