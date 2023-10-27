@@ -134,7 +134,7 @@ export default function EntryForm() {
                 <LinkComponent
                   to="/list"
                   placeholder="Back"
-                  className="text-indigo-500"
+                  className="text-indigo-400"
                 />
               </div>
             </div>
