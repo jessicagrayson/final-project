@@ -113,6 +113,16 @@ export default function EntryForm() {
                   type="file"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
+                {/* WIP - additional input */}
+                <label htmlFor="imageUrl" className="text-indigo-600">
+                  Image Url:
+                </label>
+                <Input
+                  accept=".png, .jpg, .jpeg, .gif"
+                  name="imageUrl"
+                  type="file"
+                  className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
+                />
               </div>
               <div className="flex flex-col">
                 <label htmlFor="blurb" className="text-indigo-600">
@@ -134,7 +144,7 @@ export default function EntryForm() {
                 <LinkComponent
                   to="/list"
                   placeholder="Back"
-                  className="text-indigo-400"
+                  className="text-indigo-500"
                 />
               </div>
             </div>
