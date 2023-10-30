@@ -114,7 +114,7 @@ export default function EntryForm() {
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
                 {/* WIP - additional input */}
-                <label htmlFor="imageUrl" className="text-indigo-600">
+                {/* <label htmlFor="imageUrl" className="text-indigo-600">
                   Image Url:
                 </label>
                 <Input
@@ -122,7 +122,7 @@ export default function EntryForm() {
                   name="imageUrl"
                   type="file"
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
-                />
+                /> */}
               </div>
               <div className="flex flex-col">
                 <label htmlFor="blurb" className="text-indigo-600">
