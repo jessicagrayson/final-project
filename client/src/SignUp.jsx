@@ -37,7 +37,8 @@ export default function SignUp() {
       if (!res.ok) {
         throw new Error(`Fetch error ${res.status}`);
       }
-      const user = await res.json();
+      const { user, token } = await res.json();
+      sessionStorage.setItem('token', token);
       console.log('Registered:', user);
       navigate('/list');
     } catch (error) {

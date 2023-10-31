@@ -47,8 +47,14 @@ app.post('/api/register', async (req, res, next) => {
     RETURNING "userId", "username"
     `;
     const response = await db.query(insertUserSql, [username, hashedPassword]);
-    // Responds w/ new user data
-    res.status(201).json(response.rows[0]);
+
+    // Generates JWT token with new user information
+    const userId = response.rows[0].userId;
+    const payload = { userId, username };
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+
+    // Responds w/ new user data and JWT token
+    res.status(201).json({ token, user: response.rows[0] });
     // Handles error
   } catch (error) {
     next(error);
