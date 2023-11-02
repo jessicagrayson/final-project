@@ -9,17 +9,18 @@ export default function EntryForm() {
   const navigate = useNavigate();
   const loc = useLocation();
   const entry = loc.state;
-
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
   const header = isUpdating ? 'Update entry' : 'Create an entry';
   const entryTravelDate = entry?.travelDate;
   // Entry state variables
+
   const [location, setLocation] = useState(entry?.location ?? '');
   const [travelDate, setTravelDate] = useState(
     entry?.travelDate ? formatISODate(entryTravelDate) : ''
   );
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
+  // Change handler functions
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
