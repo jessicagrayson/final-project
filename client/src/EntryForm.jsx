@@ -9,17 +9,20 @@ export default function EntryForm() {
   const navigate = useNavigate();
   const loc = useLocation();
   const entry = loc.state;
+  console.log('entry obj', entry);
   const isUpdating = !!entry;
   const entryId = entry ? entry.entryId : null;
   const header = isUpdating ? 'Update entry' : 'Create an entry';
   const entryTravelDate = entry?.travelDate;
   // Entry state variables
-
+  console.log('top:', entry.imageUrl);
   const [location, setLocation] = useState(entry?.location ?? '');
   const [travelDate, setTravelDate] = useState(
     entry?.travelDate ? formatISODate(entryTravelDate) : ''
   );
   const [blurb, setBlurb] = useState(entry?.blurb ?? '');
+  const [imageFile, setImageFile] = useState(entry?.imageFile ?? '');
+  console.log('state img:', imageFile);
   // Change handler functions
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
@@ -31,6 +34,14 @@ export default function EntryForm() {
 
   const handleBlurbChange = (e) => {
     setBlurb(e.target.value);
+  };
+
+  const handleImageUpload = (e) => {
+    const uploadedImage = e.target.files[0];
+    setImageFile(uploadedImage);
+    entry.imageUrl = imageFile;
+    console.log('imageUrl:', entry.imageUrl);
+    console.log('image file:', imageFile);
   };
 
   // Entry submission code - authentication and authorization along with conditional PUT : POST
@@ -110,6 +121,7 @@ export default function EntryForm() {
                   accept=".png, .jpg, .jpeg, .gif"
                   name="imageUrl"
                   type="file"
+                  onChange={handleImageUpload}
                   className="border-2 border-indigo-400 rounded-sm text-zinc-600 focus:bg-white bg-zinc-100 w-80 h-9"
                 />
               </div>
