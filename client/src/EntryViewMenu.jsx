@@ -99,7 +99,6 @@ export default function ViewMenu() {
           />
         </MenuItem>
         <MenuItem onClick={handleClose}></MenuItem>
-        <p>{entry && entry.imageUrl}</p>
       </Menu>
     </div>
   );
