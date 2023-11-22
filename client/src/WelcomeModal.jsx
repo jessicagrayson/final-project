@@ -4,11 +4,13 @@ import clsx from 'clsx';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import CustomButton from './CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function WelcomeModal() {
   const [open, setOpen] = React.useState(true);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -35,6 +37,10 @@ export default function WelcomeModal() {
             sign in!
           </p>
           <CustomButton
+            onClick={() => {
+              navigate('/guest-feed');
+              console.log('button clicked');
+            }}
             className={
               'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
             }
