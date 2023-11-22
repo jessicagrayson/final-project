@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import CustomButton from './CustomButton';
 
 const style = {
   position: 'absolute',
@@ -47,6 +48,13 @@ export default function TransitionsModal({ header, text, className }) {
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               {text}
             </Typography>
+            <CustomButton
+              className={
+                'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
+              }
+              type="submit"
+              label="Demo Feed"
+            />
           </Box>
         </Fade>
       </Modal>

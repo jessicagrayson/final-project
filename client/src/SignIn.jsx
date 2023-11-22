@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from './Input';
 import CustomButton from './CustomButton';
 import LinkComponent from './LinkComponent';
-import Modal from './Modal';
+import WelcomeModal from './WelcomeModal';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -52,13 +52,14 @@ export default function SignIn() {
       <div className="flex flex-col items-center justify-center gap-y-12">
         <h3 className="text-lg font-medium">Sign in to your next adventure</h3>
         <div className="flex items-end justify-center">
-          <Modal
+          {/* <WelcomeModal
             className="text-center text-indigo-400 font-lg"
             header={'Welcome to Gophr!'}
             text={
-              'Gophr is a photo blogging app built by Jessica Grayson.\nIf you are a guest, please click the button below to view a sample feed.'
+              'Gophr is a photo blogging app built by Jessica Grayson. To view a demo feed, please click the demo button!'
             }
-          />
+          /> */}
+          <WelcomeModal />
           <form onSubmit={handleSubmit} className="flex flex-col ">
             <div className="flex flex-col gap-y-12">
               <div className="flex flex-col">
