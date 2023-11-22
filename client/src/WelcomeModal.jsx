@@ -3,30 +3,44 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
+import CustomButton from './CustomButton';
 
 export default function WelcomeModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const [open, setOpen] = React.useState(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <TriggerButton type="button" onClick={handleOpen}>
+      {/* BUTTON BELOW FOR TESTING - DELETE */}
+      {/* <TriggerButton type="button" onClick={handleOpen}>
         Open modal
-      </TriggerButton>
+      </TriggerButton> */}
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
         open={open}
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}>
-        <ModalContent sx={style}>
-          <h3 id="unstyled-modal-title" className="modal-title">
-            Text in a modal
+        <ModalContent sx={{ width: 400 }}>
+          <h3 className="text-xl font-bold text-center text-indigo-500">
+            Welcome to Gophr!
           </h3>
-          <p id="unstyled-modal-description" className="modal-description">
-            Aliquid amet deserunt earum!
+          <p className="text-center">
+            Gophr is a photo blogging app for travelers who want to immortalize
+            their adventures.
           </p>
+          <p className="text-center">
+            Please view our demo, or click anywhere on the page to sign up or
+            sign in!
+          </p>
+          <CustomButton
+            className={
+              'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
+            }
+            type="submit"
+            label="Demo Feed"
+          />
         </ModalContent>
       </Modal>
     </div>
@@ -49,14 +63,14 @@ Backdrop.propTypes = {
   open: PropTypes.bool,
 };
 
-const blue = {
-  200: '#99CCFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0066CC',
-};
+// const blue = {
+//   200: '#99CCFF',
+//   300: '#66B2FF',
+//   400: '#3399FF',
+//   500: '#007FFF',
+//   600: '#0072E5',
+//   700: '#0066CC',
+// };
 
 const grey = {
   50: '#F3F6F9',
@@ -88,9 +102,9 @@ const StyledBackdrop = styled(Backdrop)`
   -webkit-tap-highlight-color: transparent;
 `;
 
-const style = {
-  width: 400,
-};
+// const style = {
+//   width: 400,
+// };
 
 const ModalContent = styled(Box)(
   ({ theme }) => `
@@ -127,36 +141,36 @@ const ModalContent = styled(Box)(
   `
 );
 
-const TriggerButton = styled('button')(
-  ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  padding: 8px 16px;
-  border-radius: 8px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+// const TriggerButton = styled('button')(
+//   ({ theme }) => `
+//   font-family: IBM Plex Sans, sans-serif;
+//   font-weight: 600;
+//   font-size: 0.875rem;
+//   line-height: 1.5;
+//   padding: 8px 16px;
+//   border-radius: 8px;
+//   color: white;
+//   transition: all 150ms ease;
+//   cursor: pointer;
+//   background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+//   border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
+//   color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
+//   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 
-  &:hover {
-    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
-  }
+//   &:hover {
+//     background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
+//     border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
+//   }
 
-  &:active {
-    background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
-  }
+//   &:active {
+//     background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
+//   }
 
-  &:focus-visible {
-    box-shadow: 0 0 0 4px ${
-      theme.palette.mode === 'dark' ? blue[300] : blue[200]
-    };
-    outline: none;
-  }
-`
-);
+//   &:focus-visible {
+//     box-shadow: 0 0 0 4px ${
+//       theme.palette.mode === 'dark' ? blue[300] : blue[200]
+//     };
+//     outline: none;
+//   }
+// `
+// );
