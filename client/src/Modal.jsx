@@ -45,7 +45,7 @@ export default function TransitionsModal({ header, text, className }) {
               {header}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {text}{' '}
+              {text}
             </Typography>
           </Box>
         </Fade>

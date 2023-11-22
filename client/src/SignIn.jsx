@@ -53,10 +53,10 @@ export default function SignIn() {
         <h3 className="text-lg font-medium">Sign in to your next adventure</h3>
         <div className="flex items-end justify-center">
           <Modal
-            className="text-xs text-center text-indigo-500"
-            header={'Welcome to Gophr'}
+            className="text-center text-indigo-400 font-lg"
+            header={'Welcome to Gophr!'}
             text={
-              'Gophr is a photo blogging app for all of your memories. If you are a guest, please click the button below to view a sample feed.'
+              'Gophr is a photo blogging app built by Jessica Grayson.\nIf you are a guest, please click the button below to view a sample feed.'
             }
           />
           <form onSubmit={handleSubmit} className="flex flex-col ">
