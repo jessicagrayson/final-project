@@ -29,41 +29,32 @@ const demoData = [
 export default function GuestFeed() {
   return (
     <div>
-      {/* <div className="flex flex-row flex-wrap items-center">
-        {demoData.map((entry) => (
-          <div key={entry.id} className="w-1/4 p-4">
-            <h2 className="mb-2 text-lg font-bold">{entry.location}</h2>
-            <p className="text-sm">{entry.blurb}</p>
-            <p>{entry.travelDate}</p>
-            <img src={entry.imageUrl} />
-          </div>
-        ))}
-      </div> */}
-      {/* NEW */}
-      <div className="flex p-3 mb-2 space-x-4 rounded md bg-slate-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
-        {demoData.map((entry) => (
-          <div key={entry.id} className="w-1/4 p-4">
-            <ImageField
-              src={entry.imageUrl}
-              className="w-40 my-1 rounded-md g-40"
-            />
-            <Input
-              className="text-sm font-semibold bg-slate-200"
-              placeholder="Location"
-              value={entry.location}
-            />
-            <Input
-              className="text-sm font-semibold bg-slate-200"
-              placeholder="Location"
-              value={entry.travelDate}
-            />
-            <Input
-              className="text-sm font-semibold bg-slate-200"
-              placeholder="Location"
-              value={entry.blurb}
-            />
-          </div>
-        ))}
+      <div className="flex flex-row flex-wrap items-center justify-center bg-orange-400 gap-y-2 gap-x-3">
+        <div className="flex p-3 mb-2 space-x-4 rounded md bg-slate-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
+          {demoData.map((entry) => (
+            <div key={entry.id} className="w-1/4 p-4">
+              <ImageField
+                src={entry.imageUrl}
+                className="w-40 my-1 rounded-md g-40"
+              />
+              <Input
+                className="text-sm font-semibold bg-slate-200"
+                placeholder="Location"
+                value={entry.location}
+              />
+              <Input
+                className="text-sm font-semibold bg-slate-200"
+                placeholder="Location"
+                value={entry.travelDate}
+              />
+              <Input
+                className="text-sm font-semibold bg-slate-200"
+                placeholder="Location"
+                value={entry.blurb}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
