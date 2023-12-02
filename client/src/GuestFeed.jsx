@@ -71,11 +71,13 @@ export default function GuestFeed() {
               className="text-sm font-semibold bg-slate-200"
               placeholder="Location"
               value={entry.location}
+              onChange={() => {}}
             />
             <Input
               className="text-sm font-semibold bg-slate-200"
               placeholder="Location"
               value={entry.travelDate}
+              onChange={() => {}}
             />
           </div>
           <div className="flex items-end">
