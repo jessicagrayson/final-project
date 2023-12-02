@@ -40,21 +40,24 @@ export default function GuestFeed() {
                 src={entry.imageUrl}
                 className="w-40 my-1 rounded-md g-40"
               />
-              <Input
-                className="text-sm font-semibold bg-yellow-200"
-                placeholder="Location"
-                value={entry.location}
-              />
-              <Input
-                className="text-sm font-semibold bg-purple-200"
-                placeholder="Location"
-                value={entry.travelDate}
-              />
-              <Input
+
+              <div className="flex flex-col bg-orange-400">
+                <Input
+                  className="text-sm font-semibold bg-yellow-200"
+                  placeholder="Location"
+                  value={entry.location}
+                />
+                <Input
+                  className="text-sm font-semibold bg-purple-200"
+                  placeholder="Location"
+                  value={entry.travelDate}
+                />
+              </div>
+              {/* <Input
                 className="text-sm font-semibold bg-red-200"
                 placeholder="Location"
                 value={entry.blurb}
-              />
+              /> */}
             </div>
           ))}
         </div>
