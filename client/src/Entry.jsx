@@ -23,7 +23,7 @@ export default function Entry({ entry }) {
   }
 
   return (
-    <div className="flex p-3 mb-2 space-x-4 rounded-md bg-yellow-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
+    <div className="flex p-3 mb-2 space-x-4 rounded-md bg-slate-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
       <ImageField
         src={entry.imageUrl}
         alt="Image"

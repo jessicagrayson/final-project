@@ -28,40 +28,37 @@ const demoData = [
 
 export default function GuestFeed() {
   return (
-    <div className="bg-green-400">
-      <div className="flex flex-row flex-wrap items-center justify-center bg-blue-500 gap-y-2 gap-x-3">
-        <div className="bg-slate-200">
-          {demoData.map((entry) => (
-            // BG color of each thing should be slate-200
-            <div
-              key={entry.id}
-              className="flex p-3 mb-2 space-x-4 rounded-md bg-slate-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
-              <ImageField
-                src={entry.imageUrl}
-                className="w-40 my-1 rounded-md g-40"
-              />
+    <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
+      {demoData.map((entry) => (
+        // BG color of each thing should be slate-200
+        <div
+          key={entry.id}
+          // CSS below is duplicate, needs to be removed
+          className="flex p-3 mb-2 space-x-4 rounded-md bg-slate-200 hover:-translate-y-0.5 transition ease-in-out delay-70">
+          <ImageField
+            src={entry.imageUrl}
+            className="w-40 h-40 my-1 rounded-md g-40"
+          />
 
-              <div className="flex flex-col">
-                <Input
-                  className="text-sm font-semibold bg-slate-200"
-                  placeholder="Location"
-                  value={entry.location}
-                />
-                <Input
-                  className="text-sm font-semibold bg-slate-200"
-                  placeholder="Location"
-                  value={entry.travelDate}
-                />
-              </div>
-              {/* <Input
+          <div className="flex flex-col">
+            <Input
+              className="text-sm font-semibold bg-slate-200"
+              placeholder="Location"
+              value={entry.location}
+            />
+            <Input
+              className="text-sm font-semibold bg-slate-200"
+              placeholder="Location"
+              value={entry.travelDate}
+            />
+          </div>
+          {/* <Input
                 className="text-sm font-semibold bg-red-200"
                 placeholder="Location"
                 value={entry.blurb}
               /> */}
-            </div>
-          ))}
         </div>
-      </div>
+      ))}
     </div>
   );
 }
