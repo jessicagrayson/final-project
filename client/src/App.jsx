@@ -7,6 +7,7 @@ import EntriesList from './EntriesList.jsx';
 import ForgottenPassword from './ForgottenPassword.jsx';
 import GuestFeed from './GuestFeed.jsx';
 import NavBar from './NavBar.jsx';
+import TechStack from './TechStack.jsx';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/entries/:entryId" element={<EntryView />} />
         <Route path="/forgotten-password" element={<ForgottenPassword />} />
         <Route path="/guest-feed" element={<GuestFeed />} />
+        <Route path="/tech-stack" element={<TechStack />} />
       </Routes>
     </div>
   );
