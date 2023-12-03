@@ -2,6 +2,7 @@ import React from 'react';
 import Input from './Input';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
+import GuestModal from './GuestModal';
 
 const demoData = [
   {
@@ -57,6 +58,7 @@ const demoData = [
 export default function GuestFeed() {
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
+      <GuestModal />
       {demoData.map((entry) => (
         <div
           key={entry.id}
