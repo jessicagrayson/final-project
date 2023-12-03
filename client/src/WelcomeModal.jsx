@@ -37,10 +37,7 @@ export default function WelcomeModal() {
             sign in!
           </p>
           <CustomButton
-            onClick={() => {
-              navigate('/guest-feed');
-              console.log('button clicked');
-            }}
+            onClick={() => navigate('/guest-feed')}
             className={
               'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
             }
