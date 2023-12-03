@@ -3,21 +3,13 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
-import CustomButton from './CustomButton';
-import { useNavigate } from 'react-router-dom';
 
-export default function WelcomeModal() {
+export default function GuestModal() {
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
 
   return (
     <div>
-      {/* BUTTON BELOW FOR TESTING - DELETE */}
-      {/* <TriggerButton type="button" onClick={handleOpen}>
-        Open modal
-      </TriggerButton> */}
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -26,24 +18,17 @@ export default function WelcomeModal() {
         slots={{ backdrop: StyledBackdrop }}>
         <ModalContent sx={{ width: 400 }}>
           <h3 className="text-xl font-bold text-center text-indigo-500">
-            Welcome to Gophr!
+            Welcome!
           </h3>
           <p className="text-center">
-            Gophr is a photo blogging app for travelers who want to immortalize
-            their adventures.
+            This page represents a demo version of Gophr's user feed. Please
+            note that some features are missing from this demo.
           </p>
           <p className="text-center">
-            Please view our demo, or click anywhere on the page to sign up or
-            sign in!
+            For tech stack information please click the menu icon in the top
+            right corner of this page. Otherwise, click elsewhere on the page to
+            close this modal.
           </p>
-          <CustomButton
-            onClick={() => navigate('/guest-feed')}
-            className={
-              'h-9 text-white bg-indigo-500 rounded-sm w-65 hover:bg-white hover:text-indigo-500 hover:border-2 hover:border-indigo-400'
-            }
-            type="submit"
-            label="Demo Feed"
-          />
         </ModalContent>
       </Modal>
     </div>

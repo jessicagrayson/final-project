@@ -5,6 +5,7 @@ import EntryForm from './EntryForm.jsx';
 import EntryView from './EntryView.jsx';
 import EntriesList from './EntriesList.jsx';
 import ForgottenPassword from './ForgottenPassword.jsx';
+import GuestFeed from './GuestFeed.jsx';
 import NavBar from './NavBar.jsx';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/update-entry/:entryId" element={<EntryForm />} />
         <Route path="/entries/:entryId" element={<EntryView />} />
         <Route path="/forgotten-password" element={<ForgottenPassword />} />
+        <Route path="/guest-feed" element={<GuestFeed />} />
       </Routes>
     </div>
   );

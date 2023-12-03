@@ -52,13 +52,6 @@ export default function SignIn() {
       <div className="flex flex-col items-center justify-center gap-y-12">
         <h3 className="text-lg font-medium">Sign in to your next adventure</h3>
         <div className="flex items-end justify-center">
-          {/* <WelcomeModal
-            className="text-center text-indigo-400 font-lg"
-            header={'Welcome to Gophr!'}
-            text={
-              'Gophr is a photo blogging app built by Jessica Grayson. To view a demo feed, please click the demo button!'
-            }
-          /> */}
           <WelcomeModal />
           <form onSubmit={handleSubmit} className="flex flex-col ">
             <div className="flex flex-col gap-y-12">
