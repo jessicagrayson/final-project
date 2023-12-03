@@ -3,20 +3,13 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
-// import { useNavigate } from 'react-router-dom';
 
 export default function GuestModal() {
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // const navigate = useNavigate();
 
   return (
     <div>
-      {/* BUTTON BELOW FOR TESTING - DELETE */}
-      {/* <TriggerButton type="button" onClick={handleOpen}>
-        Open modal
-      </TriggerButton> */}
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -28,15 +21,13 @@ export default function GuestModal() {
             Welcome!
           </h3>
           <p className="text-center">
-            This page represents a demo version of Gophr's user feed. Some
-            features are missing, however, this is an accurate representation of
-            what your post feed will look like as a user.
+            This page represents a demo version of Gophr's user feed. Please
+            note that some features are missing from this demo.
           </p>
           <p className="text-center">
-            For information about the tech stack used to build this app or to
-            navigate back to the homepage, please navigate to the menu in the
-            top right corner of this page. Otherwise, click elsewhere on the
-            page to close this modal.
+            For tech stack information please click the menu icon in the top
+            right corner of this page. Otherwise, click elsewhere on the page to
+            close this modal.
           </p>
         </ModalContent>
       </Modal>
