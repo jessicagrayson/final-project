@@ -1,16 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Button from '@mui/material/Button';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import LinkComponent from './LinkComponent';
 
 export default function GuestModal() {
   const [open, setOpen] = React.useState(true);
+  const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   return (
     <div>
+      <Button onClick={handleOpen}>Navigation</Button>
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
