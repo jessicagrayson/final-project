@@ -22,9 +22,9 @@ export default function GuestModal() {
             Welcome!
           </h3>
           <p className="text-center">
-            This page represents a demo version of Gophr's user feed. For
-            additional features, please return to the homepage and create an
-            account.
+            This page represents an abbreviated demo version of Gophr's user
+            feed. For additional features, please return to the homepage and
+            create an account.
           </p>
           <div className="flex flex-row justify-between">
             <LinkComponent

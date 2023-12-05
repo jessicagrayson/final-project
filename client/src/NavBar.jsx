@@ -12,7 +12,7 @@ export default function NavBar() {
       <GophrLogo />
       {currentPage !== '/' &&
         currentPage !== '/register' &&
-        // currentPage !== '/guest-feed' &&
+        currentPage !== '/guest-feed' &&
         currentPage !== '/forgotten-password' && <FadeMenu />}
     </div>
   );
