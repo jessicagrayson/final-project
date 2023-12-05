@@ -10,21 +10,21 @@ export default function TechStack() {
     'CSS',
     'Tailwind',
     'Material UI',
-    'AWS',
     'React Router',
     'Multer',
+    'JWT',
     'SQL',
     'Argon',
-    'JWT',
     'Elastic Beanstalk',
+    'AWS',
   ];
 
   const resources = [
-    'Figma',
     'DBDiagram',
-    'Vite',
-    'Visual Studio Code',
+    'Figma',
     'Github',
+    'Visual Studio Code',
+    'Vite',
   ];
 
   return (
