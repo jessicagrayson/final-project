@@ -14,10 +14,6 @@ export default function WelcomeModal() {
 
   return (
     <div>
-      {/* BUTTON BELOW FOR TESTING - DELETE */}
-      {/* <TriggerButton type="button" onClick={handleOpen}>
-        Open modal
-      </TriggerButton> */}
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"

@@ -10,7 +10,10 @@ export default function NavBar() {
   return (
     <div className="flex justify-between p-1 mb-2 border-b-2 rounded-sm">
       <GophrLogo />
-      {currentPage !== '/' && currentPage !== '/register' && <FadeMenu />}
+      {currentPage !== '/' &&
+        currentPage !== '/register' &&
+        // currentPage !== '/guest-feed' &&
+        currentPage !== '/forgotten-password' && <FadeMenu />}
     </div>
   );
 }
