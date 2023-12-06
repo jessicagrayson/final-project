@@ -15,10 +15,10 @@ export default function GuestModal() {
   return (
     <div>
       <div className="bg-lime-500">
-        <button className="text-pink-500" onClick={handleOpen}>
-          Test
-        </button>
         {/* <Button onClick={handleOpen}>Navigation</Button> */}
+        <button className="text-pink-500" onClick={handleOpen}>
+          Modal Trigger
+        </button>
       </div>
       <Modal
         aria-labelledby="unstyled-modal-title"
