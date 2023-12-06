@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import LinkComponent from './LinkComponent';
@@ -14,7 +14,12 @@ export default function GuestModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Navigation</Button>
+      <div className="bg-lime-500">
+        <button className="text-pink-500" onClick={handleOpen}>
+          Test
+        </button>
+        {/* <Button onClick={handleOpen}>Navigation</Button> */}
+      </div>
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -34,12 +39,12 @@ export default function GuestModal() {
             <LinkComponent
               to="/tech-stack"
               placeholder="Tech Stack"
-              className="text-indigo-500"
+              className="text-indigo-500 hover:underline"
             />{' '}
             <LinkComponent
               to="/"
               placeholder="Homepage"
-              className="text-indigo-500"
+              className="text-indigo-500 hover:underline"
             />{' '}
           </div>
         </ModalContent>
