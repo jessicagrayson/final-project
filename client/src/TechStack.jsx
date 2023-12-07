@@ -48,7 +48,6 @@ export default function TechStack() {
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <select>Testing</select>
       </div>
     </div>
   );
