@@ -8,18 +8,11 @@ import LinkComponent from './LinkComponent';
 
 export default function GuestModal() {
   const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <div className="bg-lime-500">
-        {/* <Button onClick={handleOpen}>Navigation</Button> */}
-        <button className="text-pink-500" onClick={handleOpen}>
-          Modal Trigger
-        </button>
-      </div>
       <Modal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
