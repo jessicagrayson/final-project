@@ -99,7 +99,7 @@ export default function SignUp() {
           <LinkComponent
             to="/guest-feed"
             placeholder="Demo"
-            className="text-indigo-500"
+            className="text-sm text-indigo-500 hover:underline"
           />
         </div>
       </div>
