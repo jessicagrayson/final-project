@@ -3,6 +3,7 @@ import Entry from './Entry';
 
 export default function EntriesList() {
   const [entries, setEntries] = useState([]);
+  const noEntries = 'No entries to display';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +40,9 @@ export default function EntriesList() {
           <Entry key={entry.entryId} entry={entry} />
         ))}
       </div>
+      {entriesList.length === 0 && (
+        <div className="bg-lime-500">{noEntries}</div>
+      )}
     </div>
   );
 }
