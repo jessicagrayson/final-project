@@ -92,14 +92,14 @@ export default function SignUp() {
         </div>
         <div className="flex justify-between w-full ">
           <LinkComponent
-            to="/guest-feed"
-            placeholder="Demo"
-            className="text-indigo-500"
-          />
-          <LinkComponent
             to="/"
             className="text-sm text-indigo-600 hover:underline"
             placeholder="Sign In"
+          />
+          <LinkComponent
+            to="/guest-feed"
+            placeholder="Demo"
+            className="text-indigo-500"
           />
         </div>
       </div>
