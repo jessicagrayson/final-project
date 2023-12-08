@@ -63,6 +63,13 @@ export default function FadeMenu() {
             className="text-indigo-500"
           />
         </MenuItem>
+        <MenuItem>
+          <LinkComponent
+            to="/tech-stack"
+            placeholder="Tech Stack"
+            className="text-indigo-500"
+          />
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <LinkComponent
             onClick={handleSignOut}

@@ -97,11 +97,16 @@ export default function SignIn() {
             </div>
           </form>
         </div>
-        <div className="flex justify-end w-full">
+        <div className="flex justify-between w-full">
           <LinkComponent
             to="/register"
             className="text-sm text-indigo-600 hover:underline"
             placeholder="New here?"
+          />
+          <LinkComponent
+            to="/guest-feed"
+            className="text-sm text-indigo-600 hover:underline"
+            placeholder="View Demo"
           />
         </div>
       </div>

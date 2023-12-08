@@ -1,11 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+// import Button from '@mui/material/Button';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
+import LinkComponent from './LinkComponent';
 
 export default function GuestModal() {
   const [open, setOpen] = React.useState(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -21,14 +24,22 @@ export default function GuestModal() {
             Welcome!
           </h3>
           <p className="text-center">
-            This page represents a demo version of Gophr's user feed. Please
-            note that some features are missing from this demo.
+            This page represents an abbreviated demo version of Gophr's user
+            feed. For additional features, please return to the homepage and
+            create an account.
           </p>
-          <p className="text-center">
-            For tech stack information please click the menu icon in the top
-            right corner of this page. Otherwise, click elsewhere on the page to
-            close this modal.
-          </p>
+          <div className="flex flex-row justify-between">
+            <LinkComponent
+              to="/tech-stack"
+              placeholder="Tech Stack"
+              className="text-indigo-500 hover:underline"
+            />{' '}
+            <LinkComponent
+              to="/"
+              placeholder="Homepage"
+              className="text-indigo-500 hover:underline"
+            />{' '}
+          </div>
         </ModalContent>
       </Modal>
     </div>
