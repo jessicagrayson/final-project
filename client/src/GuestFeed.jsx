@@ -90,6 +90,13 @@ export default function GuestFeed() {
           </div>
         </div>
       ))}
+      <div>
+        <LinkComponent
+          to="/"
+          placeholder="Homepage"
+          className="text-lg text-indigo-500 hover:underline"
+        />
+      </div>
     </div>
   );
 }

@@ -42,12 +42,12 @@ export default function EntriesList() {
         ))}
       </div>
       {entriesList.length === 0 && (
-        <div className="flex flex-col items-center justify-center h-screen text-xl">
-          {noEntries}
+        <div className="flex flex-col items-center justify-center h-screen tracking-wide">
+          <div className="text-3xl font-normal">{noEntries}</div>
           <LinkComponent
             placeholder={'Create New'}
             to="/create-entry"
-            className="text-indigo-500 text-md hover:underline"
+            className="text-lg font-normal text-indigo-600 hover:underline"
           />
         </div>
       )}
