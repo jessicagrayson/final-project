@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Entry from './Entry';
+import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
   const [entries, setEntries] = useState([]);
@@ -41,7 +42,14 @@ export default function EntriesList() {
         ))}
       </div>
       {entriesList.length === 0 && (
-        <div className="bg-lime-500">{noEntries}</div>
+        <div className="flex flex-col items-center justify-center h-screen text-xl">
+          {noEntries}
+          <LinkComponent
+            placeholder={'Create New'}
+            to="/create-entry"
+            className="text-indigo-500 text-md hover:underline"
+          />
+        </div>
       )}
     </div>
   );
