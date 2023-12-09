@@ -20,7 +20,7 @@ export default function WelcomeModal() {
         open={open}
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}>
-        <ModalContent sx={{ width: 400 }}>
+        <ModalContent className="mb-12" sx={{ width: 400 }}>
           <h3 className="text-xl font-bold text-center text-indigo-500">
             Welcome to Gophr!
           </h3>
