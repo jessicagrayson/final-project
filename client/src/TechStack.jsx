@@ -29,7 +29,7 @@ export default function TechStack() {
   ];
 
   return (
-    <div className="flex flex-col items-center p-4 m-6 mx-auto space-y-3 text-lg rounded-sm w-full7 bg-slate-100">
+    <div className="flex flex-col items-center w-2/3 p-4 m-6 mx-auto space-y-3 text-lg rounded-sm bg-slate-100">
       <p>
         Gophr is a full-stack photo blogging web application built by Jessica
         Grayson with a little help from the following resources and
