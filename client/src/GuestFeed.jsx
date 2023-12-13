@@ -3,6 +3,7 @@ import Input from './Input';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
 import GuestModal from './GuestModal';
+import BasicModal from './BasicModal';
 
 const demoData = [
   {
@@ -59,7 +60,11 @@ export default function GuestFeed() {
   return (
     <div className="flex flex-col flex-wrap items-center justify-center ">
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
+        <BasicModal
+          text={'Please sign in or create an account to use this feature'}
+        />
         <GuestModal />
+
         {demoData.map((entry) => (
           <div
             key={entry.id}
