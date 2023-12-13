@@ -35,7 +35,7 @@ export default function TechStack() {
         Grayson with a little help from the following resources and
         technologies:
       </p>
-      <div className="flex flex-row py-4 space-x-5">
+      <div className="flex flex-row px-2 py-5 space-x-5">
         <div className="w-1/2">
           <ul className="list-disc">
             <h1 className="mb-2 font-semibold">Tech Stack:</h1>
