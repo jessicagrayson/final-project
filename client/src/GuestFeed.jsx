@@ -57,12 +57,17 @@ const demoData = [
 ];
 
 export default function GuestFeed() {
+  // Function that handles opening modal
+  // const handleOpenModal = () => {
+  //   BasicModal;
+  // };
+
   return (
     <div className="flex flex-col flex-wrap items-center justify-center ">
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
-        <BasicModal
+        {/* <BasicModal
           text={'Please sign in or create an account to use this feature'}
-        />
+        /> */}
         <GuestModal />
 
         {demoData.map((entry) => (
@@ -92,6 +97,7 @@ export default function GuestFeed() {
               <LinkComponent
                 placeholder={'Details'}
                 className="text-sm text-indigo-500 hover:underline hover:text-indigo-500"
+                onClick={() => <BasicModal text="hello world" />}
               />
             </div>
           </div>
@@ -101,7 +107,7 @@ export default function GuestFeed() {
         <LinkComponent
           to="/"
           placeholder="Homepage"
-          className="text-xl tracking-wide text-indigo-500 hover:underline"
+          className="text-lg tracking-wide text-indigo-500 hover:underline"
         />
       </div>
     </div>
