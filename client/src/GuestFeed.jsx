@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input from './Input';
 import ImageField from './ImageField';
 import LinkComponent from './LinkComponent';
@@ -57,17 +57,15 @@ const demoData = [
 ];
 
 export default function GuestFeed() {
-  // Function that handles opening modal
-  // const handleOpenModal = () => {
-  //   BasicModal;
-  // };
+  const [showModal, setShowModal] = useState(false);
+
+  function showModalHandler() {
+    setShowModal(!showModal);
+  }
 
   return (
     <div className="flex flex-col flex-wrap items-center justify-center ">
       <div className="flex flex-row flex-wrap items-center justify-center gap-y-2 gap-x-3">
-        {/* <BasicModal
-          text={'Please sign in or create an account to use this feature'}
-        /> */}
         <GuestModal />
 
         {demoData.map((entry) => (
@@ -94,14 +92,20 @@ export default function GuestFeed() {
               />
             </div>
             <div className="flex items-end">
-              <LinkComponent
+              {/* <LinkComponent
                 placeholder={'Details'}
                 className="text-sm text-indigo-500 hover:underline hover:text-indigo-500"
-                onClick={() => <BasicModal text="hello world" />}
-              />
+                onClick={showModalHandler}
+              /> */}
+              <button
+                className="text-sm text-indigo-500 hover:underline hover:text-indigo-500"
+                onClick={() => showModalHandler()}>
+                Details
+              </button>
             </div>
           </div>
         ))}
+        {showModal && <BasicModal text={'hello world'} />}
       </div>
       <div>
         <LinkComponent
