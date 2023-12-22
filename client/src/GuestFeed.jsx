@@ -10,7 +10,7 @@ const demoData = [
     id: 1,
     location: 'Irvine, CA',
     travelDate: 'June 7, 2023',
-    imageUrl: 'public/images/grandcanyon.JPG',
+    imageUrl: 'public/images/LastFuze.jpeg',
   },
   {
     id: 2,
@@ -20,39 +20,39 @@ const demoData = [
   },
   {
     id: 3,
-    location: 'Portland, OR',
-    travelDate: 'April 14, 2023',
+    location: 'Mt. Hood, OR',
+    travelDate: 'April 14, 2022',
     imageUrl: 'public/images/Mt. Hood.jpeg',
   },
   {
     id: 4,
-    location: 'Irvine, CA',
+    location: 'Grand Canyon S. Rim, AZ',
     travelDate: 'June 7, 2023',
     imageUrl: 'public/images/grandcanyon.JPG',
   },
   {
     id: 5,
-    location: 'Big Sur, CA',
+    location: 'San Onofre, CA',
     travelDate: 'November 19, 2023',
-    imageUrl: 'public/images/BigSur.JPG',
+    imageUrl: 'public/images/San Onofre.JPG',
   },
   {
     id: 6,
     location: 'Portland, OR',
     travelDate: 'April 14, 2023',
-    imageUrl: 'public/images/Mt. Hood.jpeg',
+    imageUrl: 'public/images/Snow in PDX.jpeg',
   },
   {
     id: 7,
-    location: 'Big Sur, CA',
+    location: 'Denver, CO',
     travelDate: 'November 19, 2023',
-    imageUrl: 'public/images/BigSur.JPG',
+    imageUrl: 'public/images/Denver, Colorado.jpeg',
   },
   {
     id: 8,
-    location: 'Portland, OR',
+    location: 'Columbia River Gorge',
     travelDate: 'April 14, 2023',
-    imageUrl: 'public/images/Mt. Hood.jpeg',
+    imageUrl: 'public/images/PDX landscape.jpeg',
   },
 ];
 
