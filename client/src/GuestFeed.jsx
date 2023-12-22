@@ -105,7 +105,9 @@ export default function GuestFeed() {
             </div>
           </div>
         ))}
-        {showModal && <BasicModal text={'hello world'} />}
+        {showModal && (
+          <BasicModal text={'Please create an account to use this feature'} />
+        )}
       </div>
       <div>
         <LinkComponent
