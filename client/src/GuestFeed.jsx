@@ -92,22 +92,19 @@ export default function GuestFeed() {
               />
             </div>
             <div className="flex items-end">
-              {/* <LinkComponent
+              <LinkComponent
                 placeholder={'Details'}
                 className="text-sm text-indigo-500 hover:underline hover:text-indigo-500"
                 onClick={showModalHandler}
-              /> */}
-              <button
-                className="text-sm text-indigo-500 hover:underline hover:text-indigo-500"
-                onClick={() => showModalHandler()}>
-                Details
-              </button>
+              />
             </div>
           </div>
         ))}
-        {showModal && (
-          <BasicModal text={'Please create an account to use this feature'} />
-        )}
+        <div>
+          {showModal && (
+            <BasicModal text={'Please create an account to use this feature'} />
+          )}
+        </div>
       </div>
       <div>
         <LinkComponent

@@ -15,7 +15,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ text }) {
+export default function BasicModal({ text, className }) {
   const [open, setOpen] = React.useState(true);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -24,6 +24,7 @@ export default function BasicModal({ text }) {
     <div>
       {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
+        className={className}
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
