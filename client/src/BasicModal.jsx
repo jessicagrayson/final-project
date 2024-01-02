@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 
 const style = {
@@ -17,12 +16,10 @@ const style = {
 
 export default function BasicModal({ text, className }) {
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
       <Modal
         className={className}
         open={open}
