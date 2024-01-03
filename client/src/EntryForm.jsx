@@ -135,6 +135,7 @@ export default function EntryForm() {
                   className="text-indigo-500"
                 />
               </div>
+              <div></div>
             </div>
           </form>
         </div>

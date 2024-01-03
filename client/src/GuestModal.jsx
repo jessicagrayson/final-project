@@ -1,14 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-// import Button from '@mui/material/Button';
 import { styled, Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import LinkComponent from './LinkComponent';
 
 export default function GuestModal() {
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -61,15 +59,6 @@ Backdrop.propTypes = {
   className: PropTypes.string.isRequired,
   open: PropTypes.bool,
 };
-
-// const blue = {
-//   200: '#99CCFF',
-//   300: '#66B2FF',
-//   400: '#3399FF',
-//   500: '#007FFF',
-//   600: '#0072E5',
-//   700: '#0066CC',
-// };
 
 const grey = {
   50: '#F3F6F9',

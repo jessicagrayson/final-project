@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Entry from './Entry';
+import LinkComponent from './LinkComponent';
 
 export default function EntriesList() {
   const [entries, setEntries] = useState([]);
+  const noEntries = 'No entries to display';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +41,16 @@ export default function EntriesList() {
           <Entry key={entry.entryId} entry={entry} />
         ))}
       </div>
+      {entriesList.length === 0 && (
+        <div className="flex flex-col items-center justify-center h-screen tracking-wide">
+          <div className="text-3xl font-normal">{noEntries}</div>
+          <LinkComponent
+            placeholder={'Create New'}
+            to="/create-entry"
+            className="text-lg font-normal text-indigo-600 hover:underline"
+          />
+        </div>
+      )}
     </div>
   );
 }
